@@ -1,8 +1,11 @@
 ﻿using Patcha.InvestmentWallet.Api.Interfaces.CoinGecko;
 using Patcha.InvestmentWallet.Api.Services;
+using Patcha.InvestmentWallet.Data.DocumentDb;
 using Patcha.InvestmentWallet.Domain.CoinGecko.ApiEndPoints;
 using Patcha.InvestmentWallet.Domain.CoinGecko.Entities.Reponse.Coins;
 using Patcha.InvestmentWallet.Domain.CoinGecko.Parameters;
+using Patcha.InvestmentWallet.Domain.Documents;
+using Patcha.InvestmentWallet.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +23,7 @@ namespace Patcha.InvestmentWallet.Api.CoinGecko.Services
 
         public async Task<IReadOnlyList<CoinFullData>> GetAllCoinsDataAsync()
         {
-            return await GetAllCoinsDataAsync(OrderField.GeckoDesc, null, null, "", null);
+            return await GetAllCoinsDataAsync(OrderField.GeckoDesc, 100, 0, "brl", null);
         }
 
         public async Task<IReadOnlyList<CoinFullData>> GetAllCoinsDataAsync(string order, int? perPage, int? page, string localization = "brl", bool? sparkline = null)

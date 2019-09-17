@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Patcha.InvestmentWallet.Api.Interfaces.MercadoBitcoin;
 using Patcha.InvestmentWallet.Api.ViewModels.TradesCoins;
-using Patcha.InvestmentWallet.Core.MercadoBitcoin.Entities.Response;
+using Patcha.Coins;
 
 namespace Patcha.InvestmentWallet.Api.Services.MercadoBitcoin
 {
@@ -13,11 +13,10 @@ namespace Patcha.InvestmentWallet.Api.Services.MercadoBitcoin
         {
         }
 
-        public Task<BestPriceToBuyViewModel> GetBestPriceToBuyAsync(MercadoBitcoinOrderBook orderBook)
+        public Task<BestPriceToBuyViewModel> GetBestPriceToBuyAsync(MercadoBitcoinOrderBook orderBook, decimal min_value = 2000)
         {
             return Task.Factory.StartNew(() =>
             {
-                decimal min_value = 2000;
                 double transaction_fee_percent = (0.30 / 100);
                 var best_price_to_buy_vm = new BestPriceToBuyViewModel();
                 var prices_to_buy = orderBook.Asks;
@@ -40,8 +39,8 @@ namespace Patcha.InvestmentWallet.Api.Services.MercadoBitcoin
                 if (best_price_to_buy > 0)
                 {
                     best_price_to_buy_vm.Price = best_price_to_buy;
-                    best_price_to_buy_vm.Amount = amount_to_buy;
-                    best_price_to_buy_vm.Valeu = (decimal)amount_to_buy * best_price_to_buy;
+                    best_price_to_buy_vm.Amount = (double)(min_value / best_price_to_buy);
+                    best_price_to_buy_vm.Valeu = (decimal)best_price_to_buy_vm.Amount * best_price_to_buy;
                     var fee = best_price_to_buy_vm.Valeu * (decimal)transaction_fee_percent;
                     best_price_to_buy_vm.Fee = fee;
                 }
@@ -87,9 +86,9 @@ namespace Patcha.InvestmentWallet.Api.Services.MercadoBitcoin
             });
         }
 
-        public async Task<MercadoBitcoinOrderBook> GetOrderBookAsync()
+        public async Task<MercadoBitcoinOrderBook> GetOrderBookAsync(string coin = "BTC")
         {
-            return await GetAsync<MercadoBitcoinOrderBook>(MercadoBitcoinQueryStringService.AppendQueryString("btc/orderbook"));
+            return await GetAsync<MercadoBitcoinOrderBook>(MercadoBitcoinQueryStringService.AppendQueryString(coin + "/orderbook"));
         }
     }
 }

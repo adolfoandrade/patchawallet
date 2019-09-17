@@ -1,5 +1,4 @@
-﻿using Patcha.InvestmentWallet.Api.Requests;
-using Patcha.InvestmentWallet.Data.DocumentDb;
+﻿using Patcha.InvestmentWallet.Data.DocumentDb;
 using Patcha.InvestmentWallet.Domain.Model;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Patcha.InvestmentWallet.Api.Handlers.InvestmentCompanies
 {
-    public class GetCompaniesHandler : IGetCollectionHandler<InvestmentCompany>
+    public class GetCompaniesHandler : IGetCollectionHandler<Stock>
     {
         #region Fields
         private readonly PatchaWalletDbClient _client;
@@ -23,9 +22,9 @@ namespace Patcha.InvestmentWallet.Api.Handlers.InvestmentCompanies
         #endregion
 
         #region Methods
-        public async Task<IEnumerable<InvestmentCompany>> Handle(GetCollectionRequest<InvestmentCompany> request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Stock>> Handle(GetCollectionRequest<Stock> request, CancellationToken cancellationToken)
         {
-            return await _client.Companies.GetDocumentQuery().ToAsyncEnumerable().ToArray();
+            return await _client.Stocks.GetDocumentQuery().ToAsyncEnumerable().ToArray();
         }
         #endregion
     }

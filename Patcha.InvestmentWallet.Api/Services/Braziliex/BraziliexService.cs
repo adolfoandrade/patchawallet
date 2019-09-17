@@ -1,6 +1,6 @@
-﻿using Patcha.InvestmentWallet.Api.Interfaces.Braziliex;
+﻿using Patcha.Coins;
+using Patcha.InvestmentWallet.Api.Interfaces.Braziliex;
 using Patcha.InvestmentWallet.Api.ViewModels.TradesCoins;
-using Patcha.InvestmentWallet.Core.Braziliex.Entities.Response;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
@@ -15,10 +15,9 @@ namespace Patcha.InvestmentWallet.Api.Services.Braziliex
         {
         }
 
-        public Task<BestPriceToBuyViewModel> GetBestPriceToBuyAsync(BraziliexOrderBook braziliexOrderBook)
+        public Task<BestPriceToBuyViewModel> GetBestPriceToBuyAsync(BraziliexOrderBook braziliexOrderBook, decimal min_value = 2000)
         {
             return Task.Factory.StartNew(() => {
-                decimal min_value = 2000;
                 double transaction_fee_percent = (0.5000 / 100);
                 var best_price_to_buy_vm = new BestPriceToBuyViewModel();              
                 var prices_to_buy = braziliexOrderBook.Asks;
@@ -27,8 +26,8 @@ namespace Patcha.InvestmentWallet.Api.Services.Braziliex
                 if (best_price_to_buy != null)
                 {
                     best_price_to_buy_vm.Exchange = "Braziliex";
-                    best_price_to_buy_vm.Valeu = (decimal)best_price_to_buy.Amount * best_price_to_buy.Price;
-                    best_price_to_buy_vm.Amount = best_price_to_buy.Amount;
+                    best_price_to_buy_vm.Amount = (double)(min_value / best_price_to_buy.Price);
+                    best_price_to_buy_vm.Valeu = (decimal)best_price_to_buy_vm.Amount * best_price_to_buy.Price;
                     best_price_to_buy_vm.Price = best_price_to_buy.Price;
                     var fee = best_price_to_buy_vm.Valeu * (decimal)transaction_fee_percent;                  
                     best_price_to_buy_vm.Fee = fee;
@@ -62,9 +61,9 @@ namespace Patcha.InvestmentWallet.Api.Services.Braziliex
             });
         }
 
-        public async Task<BraziliexOrderBook> GetOrderBookAsync()
+        public async Task<BraziliexOrderBook> GetOrderBookAsync(string coin = "btc_brl")
         {
-            return await GetAsync<BraziliexOrderBook>(BraziliexQueryStringService.AppendQueryString("public/orderbook/btc_brl"));
+            return await GetAsync<BraziliexOrderBook>(BraziliexQueryStringService.AppendQueryString("public/orderbook/" + coin));
         }
     }
 }

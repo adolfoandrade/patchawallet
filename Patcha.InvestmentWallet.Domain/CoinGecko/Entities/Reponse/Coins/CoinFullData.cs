@@ -116,13 +116,13 @@ namespace Patcha.InvestmentWallet.Domain.CoinGecko.Entities.Reponse.Coins
     public class Roi
     {
         [JsonProperty("times")]
-        public double Times { get; set; }
+        public double? Times { get; set; }
 
         [JsonProperty("currency")]
         public string Currency { get; set; }
 
         [JsonProperty("percentage")]
-        public double Percentage { get; set; }
+        public double? Percentage { get; set; }
     }
 
     public class PublicInterestStats

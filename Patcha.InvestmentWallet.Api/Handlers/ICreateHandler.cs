@@ -1,7 +1,6 @@
 ﻿using MediatR;
-using Patcha.InvestmentWallet.Api.Requests;
 
-namespace Patcha.InvestmentWallet.Api.Handlers
+namespace Patcha.InvestmentWallet.Api
 {
     public interface ICreateHandler<T> : IRequestHandler<CreateRequest<T>, T>
     { }

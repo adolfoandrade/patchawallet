@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 using Patcha.InvestmentWallet.Api.Services.IIIxbit;
 using Patcha.InvestmentWallet.Api.UnitTest.Mock;
-using Patcha.InvestmentWallet.Core.IIIxbit.Entities.Response;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using Xunit;
+using Patcha.Coins;
 
 namespace Patcha.InvestmentWallet.Api.UnitTest.Services._3XBitServicesTests
 {

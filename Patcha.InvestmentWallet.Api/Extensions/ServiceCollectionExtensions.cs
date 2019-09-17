@@ -13,7 +13,7 @@ namespace Patcha.InvestmentWallet.Api.Extensions
         {
             services.Configure<DocumentDbOptions>(configuration.GetSection(COSMOSDB_CONFIGURATION_SECTION));
 
-            services.AddScoped<PatchaDbClient>();
+            services.AddScoped<PatchaWalletDbClient>();
 
             return services;
         }

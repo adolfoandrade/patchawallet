@@ -1,4 +1,4 @@
-﻿using Patcha.InvestmentWallet.Core.IIIxbit.Entities.Response;
+﻿using Patcha.Coins;
 using System.Threading.Tasks;
 
 namespace Patcha.InvestmentWallet.Api.Interfaces.IIIxbit

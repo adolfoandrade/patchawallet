@@ -12,7 +12,7 @@ namespace Patcha.InvestmentWallet.Domain.CoinGecko.Entities.Reponse.Coins
         public CurrentPrice MarketCap { get; set; }
 
         [JsonProperty("market_cap_rank")]
-        public long MarketCapRank { get; set; }
+        public long? MarketCapRank { get; set; }
 
         [JsonProperty("total_volume")]
         public CurrentPrice TotalVolume { get; set; }
@@ -24,16 +24,16 @@ namespace Patcha.InvestmentWallet.Domain.CoinGecko.Entities.Reponse.Coins
         public CurrentPrice Low24H { get; set; }
 
         [JsonProperty("price_change_24h")]
-        public double PriceChange24H { get; set; }
+        public double? PriceChange24H { get; set; }
 
         [JsonProperty("price_change_percentage_24h")]
-        public double PriceChangePercentage24H { get; set; }
+        public double? PriceChangePercentage24H { get; set; }
 
         [JsonProperty("market_cap_change_24h")]
-        public double MarketCapChange24H { get; set; }
+        public double? MarketCapChange24H { get; set; }
 
         [JsonProperty("market_cap_change_percentage_24h")]
-        public double MarketCapChangePercentage24H { get; set; }
+        public double? MarketCapChangePercentage24H { get; set; }
 
         [JsonProperty("circulating_supply")]
         public string CirculatingSupply { get; set; }
@@ -45,37 +45,37 @@ namespace Patcha.InvestmentWallet.Domain.CoinGecko.Entities.Reponse.Coins
     public class CurrentPrice
     {
         [JsonProperty("aed")]
-        public decimal Aed { get; set; }
+        public decimal? Aed { get; set; }
 
         [JsonProperty("ars")]
-        public decimal Ars { get; set; }
+        public decimal? Ars { get; set; }
 
         [JsonProperty("aud")]
-        public decimal Aud { get; set; }
+        public decimal? Aud { get; set; }
 
         [JsonProperty("bch")]
-        public decimal Bch { get; set; }
+        public decimal? Bch { get; set; }
 
         [JsonProperty("bdt")]
-        public decimal Bdt { get; set; }
+        public decimal? Bdt { get; set; }
 
         [JsonProperty("bhd")]
-        public decimal Bhd { get; set; }
+        public decimal? Bhd { get; set; }
 
         [JsonProperty("bmd")]
-        public decimal Bmd { get; set; }
+        public decimal? Bmd { get; set; }
 
         [JsonProperty("bnb")]
-        public decimal Bnb { get; set; }
+        public decimal? Bnb { get; set; }
 
         [JsonProperty("brl")]
-        public decimal Brl { get; set; }
+        public decimal? Brl { get; set; }
 
         [JsonProperty("btc")]
-        public decimal Btc { get; set; }
+        public decimal? Btc { get; set; }
 
         [JsonProperty("usd")]
-        public decimal Usd { get; set; }
+        public decimal? Usd { get; set; }
 
     }
 }

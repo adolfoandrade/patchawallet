@@ -18,5 +18,8 @@ namespace Patcha.InvestmentWallet.Api.Services
         public static readonly Uri BITCOINTRADE_API = new Uri("https://api.bitcointrade.com.br/v2/");
         public static readonly Uri BITPRECO_API = new Uri("https://api.bitpreco.com/");
         public static readonly Uri IIIXBIT_API = new Uri("https://api.exchange.3xbit.com.br/");
+        public static readonly Uri BITBLUE_API = new Uri("https://bitblue.com/api/");
+        public static readonly Uri NEGOCIECOINS_API = new Uri("https://broker.negociecoins.com.br/api/v3/");
+        public static readonly Uri FLOWBTC_API = new Uri("https://publicapi.flowbtc.com.br/v1/");
     }
 }

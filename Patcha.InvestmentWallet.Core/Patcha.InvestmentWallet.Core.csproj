@@ -5,15 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Bitrecife\" />
-    <Folder Include="Bitcointrade\" />
-    <Folder Include="Foxbit\" />
-    <Folder Include="Bitcambio\" />
-    <Folder Include="Flowbtc\" />
-    <Folder Include="Bitnuvem\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
 

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System;
 
-namespace Patcha.InvestmentWallet.Api.Requests
+namespace Patcha.InvestmentWallet.Api
 {
     public class CheckExistsRequest<T> : IRequest<bool>
     {

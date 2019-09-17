@@ -1,5 +1,4 @@
 ﻿using MongoDB.Bson;
-using Patcha.InvestmentWallet.Api.Requests;
 using Patcha.InvestmentWallet.Data.DocumentDb;
 using Patcha.InvestmentWallet.Domain.Documents;
 using Patcha.InvestmentWallet.Domain.Model;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Patcha.InvestmentWallet.Api.Handlers.InvestmentCompanies
 {
-    public class CreateCompanyHandler : ICreateHandler<InvestmentCompany>
+    public class CreateCompanyHandler : ICreateHandler<Stock>
     {
         #region Fields
         private readonly PatchaWalletDbClient _client;
@@ -23,13 +22,13 @@ namespace Patcha.InvestmentWallet.Api.Handlers.InvestmentCompanies
         #endregion
 
         #region Methods
-        public async Task<InvestmentCompany> Handle(CreateRequest<InvestmentCompany> request, CancellationToken cancellationToken)
+        public async Task<Stock> Handle(CreateRequest<Stock> request, CancellationToken cancellationToken)
         {
-            InvestmentCompanyDocument companyDocument = new InvestmentCompanyDocument
+            StockDocument companyDocument = new StockDocument
             {
                 Id = ObjectId.GenerateNewId().ToString(),
                 Name = request.Item.Name,
-                Symbol = request.Item.Symbol,
+                Code = request.Item.Code,
                 Type = request.Item.Type,
                 Region = request.Item.Region,
                 MarketOpen = request.Item.MarketOpen,
@@ -38,7 +37,7 @@ namespace Patcha.InvestmentWallet.Api.Handlers.InvestmentCompanies
                 Currency = request.Item.Currency
             };
 
-            await _client.Companies.CreateDocumentAsync(companyDocument);
+            await _client.Stocks.CreateDocumentAsync(companyDocument);
 
             return companyDocument;
         }

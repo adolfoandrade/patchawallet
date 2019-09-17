@@ -1,6 +1,6 @@
-﻿using Patcha.InvestmentWallet.Api.Interfaces.TemBTC;
+﻿using Patcha.Coins;
+using Patcha.InvestmentWallet.Api.Interfaces.TemBTC;
 using Patcha.InvestmentWallet.Api.ViewModels.TradesCoins;
-using Patcha.InvestmentWallet.Core.TemBTC.Entities.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +15,9 @@ namespace Patcha.InvestmentWallet.Api.Services.TemBTC
         {
         }
 
-        public Task<BestPriceToBuyViewModel> GetBestPriceToBuyAsync(TemBTCOrderBook orderBook)
+        public Task<BestPriceToBuyViewModel> GetBestPriceToBuyAsync(TemBTCOrderBook orderBook, decimal min_value = 2000)
         {
             return Task.Factory.StartNew(() => {
-                decimal min_value = 2000;
                 double transaction_fee_percent = (0.50 / 100);
                 var best_price_to_buy_vm = new BestPriceToBuyViewModel();
                 var prices_to_buy = orderBook.Asks;
@@ -27,8 +26,8 @@ namespace Patcha.InvestmentWallet.Api.Services.TemBTC
                 best_price_to_buy_vm.Exchange = "TemBTC";
                 if (best_price_to_buy != null)
                 {
-                    best_price_to_buy_vm.Valeu = (decimal)best_price_to_buy.Quantity * best_price_to_buy.Price;
-                    best_price_to_buy_vm.Amount = best_price_to_buy.Quantity;
+                    best_price_to_buy_vm.Amount = (double)(min_value / best_price_to_buy.Price);
+                    best_price_to_buy_vm.Valeu = (decimal)best_price_to_buy_vm.Amount * best_price_to_buy.Price;
                     best_price_to_buy_vm.Price = best_price_to_buy.Price;
                     var fee = best_price_to_buy_vm.Valeu * (decimal)transaction_fee_percent;
                     best_price_to_buy_vm.Fee = fee;
@@ -62,9 +61,9 @@ namespace Patcha.InvestmentWallet.Api.Services.TemBTC
             });
         }
 
-        public async Task<TemBTCOrderBook> GetOrderBookAsync()
+        public async Task<TemBTCOrderBook> GetOrderBookAsync(string coin = "btcbrl")
         {
-            return await GetAsync<TemBTCOrderBook>(TemBTCQueryStringService.AppendQueryString("btcbrl/orderbook"));
+            return await GetAsync<TemBTCOrderBook>(TemBTCQueryStringService.AppendQueryString(coin + "/orderbook"));
         }
     }
 }

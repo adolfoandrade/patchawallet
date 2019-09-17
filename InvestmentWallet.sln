@@ -17,7 +17,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{260F93CF-D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.InvestmentWallet.Api.UnitTest", "Patcha.InvestmentWallet.Api.UnitTest\Patcha.InvestmentWallet.Api.UnitTest.csproj", "{DD7D49C1-FDF6-40D9-A356-E32204C8F97A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patcha.InvestmentWallet.ReactAndRedux", "Patcha.InvestmentWallet.ReactAndRedux\Patcha.InvestmentWallet.ReactAndRedux.csproj", "{0B9B350A-1C7B-47C3-9D68-9672D7C65E98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.InvestmentWallet.ReactAndRedux", "Patcha.InvestmentWallet.ReactAndRedux\Patcha.InvestmentWallet.ReactAndRedux.csproj", "{0B9B350A-1C7B-47C3-9D68-9672D7C65E98}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "external", "external", "{3BC22888-A27E-4A76-A0B8-2C86B5DB28BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.Coins", "Patcha.Coins\Patcha.Coins.csproj", "{1BF4A75F-A94D-4235-A40B-BD976D5CBDC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patcha.Security", "Patcha.Security\Patcha.Security.csproj", "{78CD1BF0-510F-4CF1-BB12-4A0D964A03FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +55,14 @@ Global
 		{0B9B350A-1C7B-47C3-9D68-9672D7C65E98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B9B350A-1C7B-47C3-9D68-9672D7C65E98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B9B350A-1C7B-47C3-9D68-9672D7C65E98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BF4A75F-A94D-4235-A40B-BD976D5CBDC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BF4A75F-A94D-4235-A40B-BD976D5CBDC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BF4A75F-A94D-4235-A40B-BD976D5CBDC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BF4A75F-A94D-4235-A40B-BD976D5CBDC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78CD1BF0-510F-4CF1-BB12-4A0D964A03FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78CD1BF0-510F-4CF1-BB12-4A0D964A03FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78CD1BF0-510F-4CF1-BB12-4A0D964A03FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78CD1BF0-510F-4CF1-BB12-4A0D964A03FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +74,9 @@ Global
 		{04723B4C-1783-4103-8D57-7A2B4FB28BF5} = {F26B3520-4DB8-43BC-A723-6CC6DC33D94C}
 		{DD7D49C1-FDF6-40D9-A356-E32204C8F97A} = {260F93CF-D9CF-4E64-A104-FDD29C042CE2}
 		{0B9B350A-1C7B-47C3-9D68-9672D7C65E98} = {F26B3520-4DB8-43BC-A723-6CC6DC33D94C}
+		{3BC22888-A27E-4A76-A0B8-2C86B5DB28BD} = {F26B3520-4DB8-43BC-A723-6CC6DC33D94C}
+		{1BF4A75F-A94D-4235-A40B-BD976D5CBDC5} = {3BC22888-A27E-4A76-A0B8-2C86B5DB28BD}
+		{78CD1BF0-510F-4CF1-BB12-4A0D964A03FA} = {F26B3520-4DB8-43BC-A723-6CC6DC33D94C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {19374B53-F514-4FCE-9B84-35A2CF75BA45}

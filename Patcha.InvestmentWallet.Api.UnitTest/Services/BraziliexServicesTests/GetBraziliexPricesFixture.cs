@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
+using Patcha.Coins;
 using Patcha.InvestmentWallet.Api.Services.Braziliex;
 using Patcha.InvestmentWallet.Api.UnitTest.Mock;
-using Patcha.InvestmentWallet.Core.Braziliex.Entities.Response;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;

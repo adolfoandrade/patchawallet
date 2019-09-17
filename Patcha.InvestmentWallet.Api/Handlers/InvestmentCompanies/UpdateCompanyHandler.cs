@@ -1,5 +1,4 @@
 ﻿using MongoDB.Bson;
-using Patcha.InvestmentWallet.Api.Requests;
 using Patcha.InvestmentWallet.Data.DocumentDb;
 using Patcha.InvestmentWallet.Domain.Model;
 using System;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Patcha.InvestmentWallet.Api.Handlers.InvestmentCompanies
 {
-    public class UpdateCompanyHandler : IUpdateHandler<InvestmentCompany>
+    public class UpdateCompanyHandler : IUpdateHandler<Stock>
     {
         private readonly PatchaWalletDbClient _client;
 
@@ -18,17 +17,17 @@ namespace Patcha.InvestmentWallet.Api.Handlers.InvestmentCompanies
         {
             _client = client;
         }
-        public async Task<InvestmentCompany> Handle(UpdateRequest<InvestmentCompany> request, CancellationToken cancellationToken)
+        public async Task<Stock> Handle(UpdateRequest<Stock> request, CancellationToken cancellationToken)
         {
-            InvestmentCompany companyDocument = await _client.Companies.GetDocumentQuery().Where(c => c.Id == request.Id).Take(1).ToAsyncEnumerable().FirstOrDefault();
+            Stock companyDocument = await _client.Stocks.GetDocumentQuery().Where(c => c.Id == request.Id).Take(1).ToAsyncEnumerable().FirstOrDefault();
 
             if (companyDocument != null)
             {
-                var company = await _client.Companies.GetDocumentQuery().Where(c => c.Id == request.Update.Id).ToAsyncEnumerable().FirstOrDefault();
+                var company = await _client.Stocks.GetDocumentQuery().Where(c => c.Id == request.Update.Id).ToAsyncEnumerable().FirstOrDefault();
 
                 company.Id = ObjectId.GenerateNewId().ToString();
                 company.Name = request.Update.Name;
-                company.Symbol = request.Update.Symbol;
+                company.Code = request.Update.Code;
                 company.Type = request.Update.Type;
                 company.Region = request.Update.Region;
                 company.MarketOpen = request.Update.MarketOpen;
@@ -37,7 +36,7 @@ namespace Patcha.InvestmentWallet.Api.Handlers.InvestmentCompanies
                 company.Currency = request.Update.Currency;
                 company.Quote = request.Update.Quote;
 
-                await _client.Companies.ReplaceDocumentAsync(request.Id, company);
+                await _client.Stocks.ReplaceDocumentAsync(request.Id, company);
             }
 
             return companyDocument;
