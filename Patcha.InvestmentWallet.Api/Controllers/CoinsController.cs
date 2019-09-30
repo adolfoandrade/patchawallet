@@ -21,7 +21,7 @@ namespace Patcha.InvestmentWallet.Api.Controllers
             _coinsService = coinsService;
             _mediator = mediator;
         }
-
+        
         [HttpGet]
         public async Task<IActionResult> Get(string order, int? perPage, int? page, string localization, bool? sparkline)
         {

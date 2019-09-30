@@ -66,7 +66,7 @@ namespace Patcha.InvestmentWallet.Api.Controllers {
             _logger = logger;
         }
         #endregion
-
+        
         #region Actions
         // GET api/purchases
         [HttpGet]
@@ -284,7 +284,7 @@ namespace Patcha.InvestmentWallet.Api.Controllers {
         }
 
         #endregion
-
+        
         #region Methods
         private UpdateRequest<T> CreateUpdateRequest<T> (string id, T update) {
             return new UpdateRequest<T> (id, update);
