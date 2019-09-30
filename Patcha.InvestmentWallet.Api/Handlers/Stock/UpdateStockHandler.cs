@@ -7,13 +7,13 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Patcha.InvestmentWallet.Api.Handlers.InvestmentCompanies
+namespace Patcha.InvestmentWallet.Api
 {
-    public class UpdateCompanyHandler : IUpdateHandler<Stock>
+    public class UpdateStockHandler : IUpdateHandler<Stock>
     {
         private readonly PatchaWalletDbClient _client;
 
-        public UpdateCompanyHandler(PatchaWalletDbClient client)
+        public UpdateStockHandler(PatchaWalletDbClient client)
         {
             _client = client;
         }

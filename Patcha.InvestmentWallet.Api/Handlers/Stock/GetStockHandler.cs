@@ -6,25 +6,25 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Patcha.InvestmentWallet.Api.Handlers.InvestmentCompanies
+namespace Patcha.InvestmentWallet.Api
 {
-    public class GetCompanyHandler : IGetSingleHandler<Stock>
+    public class GetStockHandler : IGetCollectionHandler<Stock>
     {
         #region Fields
         private readonly PatchaWalletDbClient _client;
         #endregion
 
         #region Constructor
-        public GetCompanyHandler(PatchaWalletDbClient client)
+        public GetStockHandler(PatchaWalletDbClient client)
         {
             _client = client;
         }
         #endregion
 
         #region Methods
-        public async Task<Stock> Handle(GetSingleRequest<Stock> request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Stock>> Handle(GetCollectionRequest<Stock> request, CancellationToken cancellationToken)
         {
-            return await _client.Stocks.GetDocumentQuery().Where(c => c.Id == request.Id).ToAsyncEnumerable().FirstOrDefault();
+            return await _client.Stocks.GetDocumentQuery().ToAsyncEnumerable().ToArray();
         }
         #endregion
     }

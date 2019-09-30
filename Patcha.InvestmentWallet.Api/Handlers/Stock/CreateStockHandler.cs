@@ -6,16 +6,16 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Patcha.InvestmentWallet.Api.Handlers.InvestmentCompanies
+namespace Patcha.InvestmentWallet.Api
 {
-    public class CreateCompanyHandler : ICreateHandler<Stock>
+    public class CreateStockHandler : ICreateHandler<Stock>
     {
         #region Fields
         private readonly PatchaWalletDbClient _client;
         #endregion
 
         #region Constructor
-        public CreateCompanyHandler(PatchaWalletDbClient client)
+        public CreateStockHandler(PatchaWalletDbClient client)
         {
             _client = client;
         }

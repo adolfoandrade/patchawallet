@@ -44,7 +44,6 @@ namespace Patcha.InvestmentWallet.Api
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly ICoinsService _coinsService;
         private readonly ISymbolSearchService _symbolSearchService;
-        private readonly IGlobalQuoteService _globalQuoteService;
         private readonly ILogger<NegotiationsController> _logger;
 
         #endregion
@@ -63,7 +62,6 @@ namespace Patcha.InvestmentWallet.Api
             _hostingEnvironment = hostingEnvironment;
             _coinsService = coinsService;
             _symbolSearchService = symbolSearchService;
-            _globalQuoteService = globalQuoteService;
             _logger = logger;
         }
         #endregion
@@ -308,7 +306,6 @@ namespace Patcha.InvestmentWallet.Api
         {
             return Task.Factory.StartNew(() =>
             {
-                var investment_symbols = negociations.Select(s => s.Stock.Symbol).Distinct();
                 var investment_ids = negociations.Select(s => s.Stock.Id).Distinct();
                 var stockPriceInfoVM = new List<StocksPricesInfoViewModel>();
 
@@ -333,8 +330,14 @@ namespace Patcha.InvestmentWallet.Api
                     if (total_amount > 0)
                     {
                         var company = negociations_histories.Select(p => p.Stock).FirstOrDefault();
-                        var quotes = _mediator.Send(new GetCollectionRequest<Quote>()).Result;
-                        var quote = quotes.Where(x => x.Symbol == company.Symbol).FirstOrDefault();
+                        var quotes = _mediator.Send(new GetCollectionRequest<Quote>()).Result.OrderByDescending(x => x.LastRequest);
+                        var quote = quotes.FirstOrDefault(x => x.Symbol == company.Symbol);
+
+                        if(quote == null)
+                        {
+                            // Call an other api or web crawler to get current price
+                        }
+
                         stockPriceInfoVM.Add(new StocksPricesInfoViewModel()
                         {
                             Stock = company,
