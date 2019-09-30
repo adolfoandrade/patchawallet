@@ -28,7 +28,7 @@ namespace Patcha.InvestmentWallet.Api.Handlers.InvestmentCompanies
             {
                 Id = ObjectId.GenerateNewId().ToString(),
                 Name = request.Item.Name,
-                Code = request.Item.Code,
+                Symbol = request.Item.Symbol,
                 Type = request.Item.Type,
                 Region = request.Item.Region,
                 MarketOpen = request.Item.MarketOpen,

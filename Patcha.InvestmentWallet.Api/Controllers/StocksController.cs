@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Patcha.InvestmentWallet.Api.Controllers
+namespace Patcha.InvestmentWallet.Api
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -30,14 +30,12 @@ namespace Patcha.InvestmentWallet.Api.Controllers
         #endregion
 
         #region Actions
-        // GET api/companies
         [HttpGet]
         public async Task<IEnumerable<Stock>> Get()
         {
             return await _mediator.Send(new GetCollectionRequest<Stock>());
         }
 
-        // GET api/companies/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Stock>> Get(string id)
         {
@@ -50,15 +48,9 @@ namespace Patcha.InvestmentWallet.Api.Controllers
             return company;
         }
 
-        // POST api/companies
-        [HttpPost]
+         [HttpPost]
         public async Task<IActionResult> Post(Stock company)
         {
-            //if (await _mediator.Send(new CheckExistsRequest<InvestmentCompany>(company.Name)))
-            //{
-            //    return StatusCode((int)HttpStatusCode.Conflict);
-            //}
-
             company = await _mediator.Send(new CreateRequest<Stock>(company));
 
             return CreatedAtAction(nameof(Get), new { company.Id }, company);

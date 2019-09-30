@@ -17,7 +17,7 @@ using Patcha.InvestmentWallet.Api.Interfaces.Negociecoins;
 using Patcha.InvestmentWallet.Api.Interfaces.TemBTC;
 using Patcha.InvestmentWallet.Api.ViewModels.TradesCoins;
 
-namespace Patcha.InvestmentWallet.Api.Controllers {
+namespace Patcha.InvestmentWallet.Api {
     
     [Route ("api/[controller]")]
     [ApiController]

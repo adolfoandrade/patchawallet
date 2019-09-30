@@ -39,11 +39,20 @@ namespace Patcha.InvestmentWallet.Api.HostedService
                 do
                 {
                     Thread.Sleep(60001);
-                    result = _globalQuoteService.GetGlobalQuote(Functions.GLOBAL_QUOTE, company.Code).Result;
+                    try
+                    {
+                        result = _globalQuoteService.GetGlobalQuote(Functions.GLOBAL_QUOTE, company.Symbol).Result;
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex.Message);
+                        Thread.Sleep(100001);
+                    }
+                    
                 }
-                while (result.GlobalQuote == null);
+                while (result == null || result?.GlobalQuote == null);
                 
-                if (result != null && result.GlobalQuote != null)
+                if (result?.GlobalQuote != null)
                 {
                     var quote = new Quote()
                     {
@@ -61,7 +70,7 @@ namespace Patcha.InvestmentWallet.Api.HostedService
                         LatestTradingDay = result.GlobalQuote.LatestTradingDay
                     };
 
-                    var inserted = _mediator.Send(new CreateRequest<Quote>(quote)).Result;
+                    _mediator.Send(new CreateRequest<Quote>(quote));
                 }
             }
         }
