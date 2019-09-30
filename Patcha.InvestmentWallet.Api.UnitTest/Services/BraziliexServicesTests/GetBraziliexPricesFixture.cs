@@ -24,10 +24,9 @@ namespace Patcha.InvestmentWallet.Api.UnitTest.Services.BraziliexServicesTests
 
             // Assert
             Assert.Equal(19999, best_price_to_buy.Price);
-            Assert.Equal(0.91636323, best_price_to_buy.Amount);
-            Assert.Equal(18326.34823677m, best_price_to_buy.Valeu);
-            Assert.Equal(91.63174118385m, best_price_to_buy.Fee);
-            Assert.True(best_price_to_buy.Valeu > 2000);
+            Assert.Equal(0.10000500025001251, best_price_to_buy.Amount);
+            Assert.Equal(1999.999999999989988m, best_price_to_buy.Valeu);
+            Assert.Equal(9.999999999999949940m, best_price_to_buy.Fee);
         }
 
         [Fact]
@@ -42,11 +41,10 @@ namespace Patcha.InvestmentWallet.Api.UnitTest.Services.BraziliexServicesTests
             var best_price_to_sell = _sut.GetBestPriceToSellAsync(mockData, best_price_to_buy.Amount).Result;
 
             // Assert
-            Assert.Equal(19751, best_price_to_sell.Price);
-            Assert.Equal(1.15963292, best_price_to_sell.Amount);
-            Assert.Equal(18099.09015573m, best_price_to_sell.Valeu);
-            Assert.Equal(144.743176167975m, best_price_to_sell.Fee);
-            Assert.True(best_price_to_sell.Valeu > 2000);
+            Assert.Equal(19889.01m, best_price_to_sell.Price);
+            Assert.Equal(0.2, best_price_to_sell.Amount);
+            Assert.Equal(1989.00045002249116812m, best_price_to_sell.Valeu);
+            Assert.Equal(23.917503375168683760900m, best_price_to_sell.Fee);
         }
 
     }

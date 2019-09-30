@@ -20,7 +20,7 @@ namespace Patcha.InvestmentWallet.Api.Services.IIIxbit
                 var best_price_to_buy_vm = new BestPriceToBuyViewModel();
                 var prices_to_buy = orderBook.SellOrders;
 
-                var best_price_to_buy = prices_to_buy.Where(p => ((decimal)p.Quantity * (p.Price * orderBook.ExchangeRate)) > min_value).FirstOrDefault();
+                var best_price_to_buy = prices_to_buy.FirstOrDefault(p => ((decimal)p.Quantity * (p.Price * orderBook.ExchangeRate)) > min_value);
                 best_price_to_buy.Price *= orderBook.ExchangeRate;
                 best_price_to_buy_vm.Exchange = "3xBit";
 
@@ -47,7 +47,7 @@ namespace Patcha.InvestmentWallet.Api.Services.IIIxbit
                 decimal withdrawal_fee_brl = 9.90m;
                 var best_price_to_sell_vm = new BestPriceToSellViewModel();
                 var prices_to_sell = orderBook.BuyOrders;
-                var best_price_to_sell = prices_to_sell.Where(p => ((decimal)p.Quantity * p.Price) > min_value).FirstOrDefault();
+                var best_price_to_sell = prices_to_sell.FirstOrDefault(p => ((decimal)p.Quantity * p.Price) > min_value);
 
                 if (best_price_to_sell != null)
                 {
