@@ -2,6 +2,6 @@
 
 namespace Patcha.InvestmentWallet.Api
 {
-    public interface ICheckExistsHandler<T> : IRequestHandler<CheckExistsRequest<T>, bool>
+    public interface ICheckExistsHandler<T> : IRequestHandler<CheckExistsRequest<T>, T>
     { }
 }

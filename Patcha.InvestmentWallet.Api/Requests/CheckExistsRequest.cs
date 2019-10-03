@@ -3,28 +3,21 @@ using System;
 
 namespace Patcha.InvestmentWallet.Api
 {
-    public class CheckExistsRequest<T> : IRequest<bool>
+    public class CheckExistsRequest<T> : IRequest<T>
     {
         #region Properties
-        public string Name { get; }
-
-        public string OtherThanId { get; }
+        public T Item { get; }
         #endregion
 
-        #region Constructors
-        public CheckExistsRequest(string name)
-            : this(name, null)
-        { }
-
-        public CheckExistsRequest(string name, string otherThanId)
+        #region Constructor
+        public CheckExistsRequest(T item)
         {
-            if (String.IsNullOrWhiteSpace(name))
+            if (item == null)
             {
-                throw new ArgumentException(nameof(name));
+                throw new ArgumentNullException(nameof(item));
             }
 
-            Name = name;
-            OtherThanId = otherThanId;
+            Item = item;
         }
         #endregion
     }

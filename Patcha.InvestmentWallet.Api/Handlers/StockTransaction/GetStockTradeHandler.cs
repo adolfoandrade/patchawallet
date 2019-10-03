@@ -6,20 +6,20 @@ using Patcha.InvestmentWallet.Data.DocumentDb;
 using Patcha.InvestmentWallet.Domain.Model;
 
 namespace Patcha.InvestmentWallet.Api {
-    public class GetStockTradeRequest : IGetCollectionHandler<StockTrade> {
+    public class GetStockTradeHandler : IGetCollectionHandler<StockTransaction> {
         #region Fields
         private readonly PatchaWalletDbClient _client;
         #endregion
 
         #region Constructor
-        public GetStockTradeRequest (PatchaWalletDbClient client) {
+        public GetStockTradeHandler(PatchaWalletDbClient client) {
             _client = client;
         }
         #endregion
 
         #region Methods
-        public async Task<IEnumerable<StockTrade>> Handle (GetCollectionRequest<StockTrade> request, CancellationToken cancellationToken) {
-            return  await _client.StockTrades.GetDocumentQuery ().ToAsyncEnumerable ().ToArray();
+        public async Task<IEnumerable<StockTransaction>> Handle (GetCollectionRequest<StockTransaction> request, CancellationToken cancellationToken) {
+            return  await _client.StockTransactions.GetDocumentQuery ().ToAsyncEnumerable ().ToArray();
         }
         #endregion
     }

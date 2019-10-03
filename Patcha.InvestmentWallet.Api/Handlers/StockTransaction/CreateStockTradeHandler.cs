@@ -6,25 +6,28 @@ using Patcha.InvestmentWallet.Data.DocumentDb;
 using Patcha.InvestmentWallet.Domain.Documents;
 using Patcha.InvestmentWallet.Domain.Model;
 
-namespace Patcha.InvestmentWallet.Api {
-    public class CreateStockTradeHandler : ICreateHandler<StockTrade> {
+namespace Patcha.InvestmentWallet.Api
+{
+    public class CreateStockTransactionHandler : ICreateHandler<StockTransaction>
+    {
         #region Fields
         private readonly PatchaWalletDbClient _client;
         #endregion
 
         #region Constructor
-        public CreateStockTradeHandler (PatchaWalletDbClient client) {
+        public CreateStockTransactionHandler(PatchaWalletDbClient client)
+        {
             _client = client;
         }
         #endregion
 
         #region Methods
-        public async Task<StockTrade> Handle (CreateRequest<StockTrade> request, CancellationToken cancellationToken) {
-            var trade = _client.StockTrades.GetDocumentQuery ()
-                .FirstOrDefault (c => c.Id == request.Item.Id);
+        public async Task<StockTransaction> Handle(CreateRequest<StockTransaction> request, CancellationToken cancellationToken)
+        {
 
-            StockTradeDocument purchaseDocument = new StockTradeDocument {
-                Id = ObjectId.GenerateNewId ().ToString (),
+            StockTransactionDocument purchaseDocument = new StockTransactionDocument
+            {
+                Id = ObjectId.GenerateNewId().ToString(),
                 Stock = request.Item.Stock,
                 Amount = request.Item.Amount,
                 Price = request.Item.Price,
@@ -33,7 +36,7 @@ namespace Patcha.InvestmentWallet.Api {
                 When = request.Item.When
             };
 
-            await _client.StockTrades.CreateDocumentAsync (purchaseDocument);
+            await _client.StockTransactions.CreateDocumentAsync(purchaseDocument);
 
             return purchaseDocument;
         }

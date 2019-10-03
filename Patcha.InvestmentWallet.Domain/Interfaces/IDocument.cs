@@ -1,4 +1,4 @@
-﻿namespace Patcha.InvestmentWallet.Domain.Documents
+﻿namespace Patcha.InvestmentWallet.Domain.Interfaces
 {
     public interface IDocument
     {

@@ -15,10 +15,10 @@ namespace Patcha.InvestmentWallet.Api
     {
         #region Fields
         private readonly IMediator _mediator;
-        private readonly List<StockTrade> _swingtrade = new List<StockTrade>{
-            new StockTrade(){ Stock = new Stock(){}, Commission = 0, Amount = 100, Price = 10.24M, When = DateTime.Parse("2019/03/09"), TradeType = TradeTypeEnum.BUY },
-            new StockTrade(){ Stock = new Stock(){}, Commission = 0, Amount = 100, Price = 10.17M, When = DateTime.Parse("2019/04/09"), TradeType = TradeTypeEnum.BUY },
-            new StockTrade(){ Stock = new Stock(){}, Commission = 0, Amount = 100, Price = 10.52M, When = DateTime.Parse("2019/06/09"), TradeType = TradeTypeEnum.SELL }
+        private readonly List<StockTransaction> _swingtrade = new List<StockTransaction>{
+            new StockTransaction(){ Stock = new Stock(){}, Commission = 0, Amount = 100, Price = 10.24M, When = DateTime.Parse("2019/03/09"), TradeType = TradeTypeEnum.BUY },
+            new StockTransaction(){ Stock = new Stock(){}, Commission = 0, Amount = 100, Price = 10.17M, When = DateTime.Parse("2019/04/09"), TradeType = TradeTypeEnum.BUY },
+            new StockTransaction(){ Stock = new Stock(){}, Commission = 0, Amount = 100, Price = 10.52M, When = DateTime.Parse("2019/06/09"), TradeType = TradeTypeEnum.SELL }
         };
         #endregion
 

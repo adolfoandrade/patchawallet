@@ -1,7 +1,10 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Net.Http;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +13,7 @@ using Newtonsoft.Json.Converters;
 using Patcha.InvestmentWallet.Api.CoinGecko.Services;
 using Patcha.InvestmentWallet.Api.Extensions;
 using Patcha.InvestmentWallet.Api.HostedService;
+using Patcha.InvestmentWallet.Api.Interfaces;
 using Patcha.InvestmentWallet.Api.Interfaces.AlphaVantage;
 using Patcha.InvestmentWallet.Api.Interfaces.Bitblue;
 using Patcha.InvestmentWallet.Api.Interfaces.Bitcointoyou;
@@ -21,6 +25,7 @@ using Patcha.InvestmentWallet.Api.Interfaces.IIIxbit;
 using Patcha.InvestmentWallet.Api.Interfaces.MercadoBitcoin;
 using Patcha.InvestmentWallet.Api.Interfaces.Negociecoins;
 using Patcha.InvestmentWallet.Api.Interfaces.TemBTC;
+using Patcha.InvestmentWallet.Api.Services;
 using Patcha.InvestmentWallet.Api.Services.AlphaVantage;
 using Patcha.InvestmentWallet.Api.Services.Bitblue;
 using Patcha.InvestmentWallet.Api.Services.Bitcointoyou;
@@ -31,6 +36,7 @@ using Patcha.InvestmentWallet.Api.Services.IIIxbit;
 using Patcha.InvestmentWallet.Api.Services.MercadoBitcoin;
 using Patcha.InvestmentWallet.Api.Services.Negociecoins;
 using Patcha.InvestmentWallet.Api.Services.TemBTC;
+using Patcha.InvestmentWallet.Domain.DomainNotification;
 
 namespace Patcha.InvestmentWallet.Api
 {
@@ -65,8 +71,13 @@ namespace Patcha.InvestmentWallet.Api
             services.AddTransient<IBitcointradeService, BitcointradeService>();
             services.AddTransient<IFlowbtcService, FlowbtcService>();
 
+            services.AddScoped<ITransactionService, TransactionService>();
+            services.AddScoped<IStockTradeService, StockTradeService>();
+
             services.AddHostedService<GlobalQuoteTimedHostedService>();
             services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
+
+            services.AddScoped<IDomainNotificationHandler<DomainNotification>, DomainNotificationHandler>();
 
             // Angular's default header name for sending the XSRF token.
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");

@@ -21,7 +21,7 @@ namespace Patcha.InvestmentWallet.Api {
     
     [Route ("api/[controller]")]
     [ApiController]
-    public class TradesCoinsController : ControllerBase {
+    public class CoinsTradeController : ControllerBase {
         private readonly IMediator _mediator;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IMercadoBitcoinService _mercadoBitcoinService;
@@ -33,9 +33,9 @@ namespace Patcha.InvestmentWallet.Api {
         private readonly INegociecoinsService _negociecoinsService;
         private readonly IBitcointradeService _bitcointradeService;
         private readonly IFlowbtcService _flowbtcService;
-        private readonly ILogger<NegotiationsController> _logger;
+        private readonly ILogger<CoinsTradeController> _logger;
 
-        public TradesCoinsController (IMediator mediator,
+        public CoinsTradeController(IMediator mediator,
             IHostingEnvironment hostingEnvironment,
             IMercadoBitcoinService mercadoBitcoinService,
             IBraziliexService braziliexService,
@@ -46,7 +46,7 @@ namespace Patcha.InvestmentWallet.Api {
             INegociecoinsService negociecoinsService,
             IBitcointradeService bitcointradeService,
             IFlowbtcService flowbtcService,
-            ILogger<NegotiationsController> logger) {
+            ILogger<CoinsTradeController> logger) {
             _mediator = mediator;
             _hostingEnvironment = hostingEnvironment;
             _mercadoBitcoinService = mercadoBitcoinService;
@@ -101,14 +101,14 @@ namespace Patcha.InvestmentWallet.Api {
             else
                 gain = ((gainMoney - (buy_at.Fee + sell_at.Fee)) * 100) / 100;
 
-            var response = new BuyAndSellViewModel () {
+            var response = new BuyAndSellViewModel() {
                 BestPriceToBuyViewModel = best_price_to_buy,
                 BestPriceToSellViewModel = best_price_to_sell,
                 BuyAt = buy_at,
                 SellAt = sell_at,
                 WithDrawal = buy_at.Fee + sell_at.Fee,
                 Gain = gainMoney - (buy_at.Fee + sell_at.Fee),
-                PercentageGain = gain.ToString () + "%"
+                PercentageGain = $"{gain}%"
             };
 
             return response;

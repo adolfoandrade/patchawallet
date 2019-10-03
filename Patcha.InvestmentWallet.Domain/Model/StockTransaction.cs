@@ -4,7 +4,7 @@ using System;
 
 namespace Patcha.InvestmentWallet.Domain.Model
 {
-    public class StockTrade
+    public class StockTransaction
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

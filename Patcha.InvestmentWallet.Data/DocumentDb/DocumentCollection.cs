@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.Documents.Client;
 using MongoDB.Driver;
-using Patcha.InvestmentWallet.Domain.Documents;
+using Patcha.InvestmentWallet.Domain.Interfaces;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

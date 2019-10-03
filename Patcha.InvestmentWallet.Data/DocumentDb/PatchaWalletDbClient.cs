@@ -11,7 +11,7 @@ namespace Patcha.InvestmentWallet.Data.DocumentDb {
         private const string STOCK_COLLECTION_ID = "stocks";
         private const string COIN_COLLECTION_ID = "coins";
         private const string COIN_TRADE_COLLECTION_ID = "cointrades";
-        private const string STOCK_TRADE_COLLECTION_ID = "stocktrades";
+        private const string STOCK_TRADE_COLLECTION_ID = "stocktransactions";
         private const string QUOTE_COLLECTION_ID = "quotes";
 
         private readonly MongoDbOptions _options;
@@ -22,7 +22,7 @@ namespace Patcha.InvestmentWallet.Data.DocumentDb {
         public DocumentCollection<StockDocument> Stocks { get; }
         public DocumentCollection<CoinDocument> Coins { get; }
         public DocumentCollection<CoinTradeDocument> CoinTrades { get; }
-        public DocumentCollection<StockTradeDocument> StockTrades { get; }
+        public DocumentCollection<StockTransactionDocument> StockTransactions { get; }
         public DocumentCollection<QuoteDocument> Quotes { get; }
         #endregion
 
@@ -34,7 +34,7 @@ namespace Patcha.InvestmentWallet.Data.DocumentDb {
             Stocks = new DocumentCollection<StockDocument> (_client, _options.DatabaseId, STOCK_COLLECTION_ID);
             Coins = new DocumentCollection<CoinDocument> (_client, _options.DatabaseId, COIN_COLLECTION_ID);
             CoinTrades = new DocumentCollection<CoinTradeDocument> (_client, _options.DatabaseId, COIN_TRADE_COLLECTION_ID);
-            StockTrades = new DocumentCollection<StockTradeDocument> (_client, _options.DatabaseId, STOCK_TRADE_COLLECTION_ID);
+            StockTransactions = new DocumentCollection<StockTransactionDocument> (_client, _options.DatabaseId, STOCK_TRADE_COLLECTION_ID);
             Quotes = new DocumentCollection<QuoteDocument> (_client, _options.DatabaseId, QUOTE_COLLECTION_ID);
         }
         #endregion
