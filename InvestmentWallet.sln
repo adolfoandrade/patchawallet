@@ -3,23 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.InvestmentWallet.Api", "Patcha.InvestmentWallet.Api\Patcha.InvestmentWallet.Api.csproj", "{38858893-B8F3-4656-B4BA-5779C5648DB9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.InvestmentWallet.Domain", "Patcha.InvestmentWallet.Domain\Patcha.InvestmentWallet.Domain.csproj", "{C25E40C1-EE49-4AC7-9808-AF6400D0B0AE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.InvestmentWallet.Data", "Patcha.InvestmentWallet.Data\Patcha.InvestmentWallet.Data.csproj", "{56A192E4-0FEE-496A-BB48-B46CFA2CBADF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F26B3520-4DB8-43BC-A723-6CC6DC33D94C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{260F93CF-D9CF-4E64-A104-FDD29C042CE2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.InvestmentWallet.Api.UnitTest", "Patcha.InvestmentWallet.Api.UnitTest\Patcha.InvestmentWallet.Api.UnitTest.csproj", "{DD7D49C1-FDF6-40D9-A356-E32204C8F97A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "external", "external", "{3BC22888-A27E-4A76-A0B8-2C86B5DB28BD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.Coins", "Patcha.Coins\Patcha.Coins.csproj", "{1BF4A75F-A94D-4235-A40B-BD976D5CBDC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.Coins", "Banckend\Patcha.Coins\Patcha.Coins.csproj", "{EC98A511-8192-48A7-A061-E2F51D47EFBE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.Security", "Patcha.Security\Patcha.Security.csproj", "{78CD1BF0-510F-4CF1-BB12-4A0D964A03FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.InvestmentWallet.Domain", "Banckend\Patcha.InvestmentWallet.Domain\Patcha.InvestmentWallet.Domain.csproj", "{FFB41ED9-5EBB-489C-9ACC-FCEBAF9F5F65}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.InvestmentWallet.Data", "Banckend\Patcha.InvestmentWallet.Data\Patcha.InvestmentWallet.Data.csproj", "{A2825316-22CC-410D-BF90-D34B08FBF6EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.InvestmentWallet.Api", "Banckend\Patcha.InvestmentWallet.Api\Patcha.InvestmentWallet.Api.csproj", "{41A91677-1F2A-41DF-B30C-204C9D1F9057}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.Security", "Banckend\Patcha.Security\Patcha.Security.csproj", "{B2BC7B6D-0AC0-455D-9EFF-F4BD56396A28}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patcha.InvestmentWallet.Api.UnitTest", "Banckend\Patcha.InvestmentWallet.Api.UnitTest\Patcha.InvestmentWallet.Api.UnitTest.csproj", "{0317B54D-FF1F-48A4-9050-9E1013DC8196}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,42 +27,42 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{38858893-B8F3-4656-B4BA-5779C5648DB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38858893-B8F3-4656-B4BA-5779C5648DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38858893-B8F3-4656-B4BA-5779C5648DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38858893-B8F3-4656-B4BA-5779C5648DB9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C25E40C1-EE49-4AC7-9808-AF6400D0B0AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C25E40C1-EE49-4AC7-9808-AF6400D0B0AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C25E40C1-EE49-4AC7-9808-AF6400D0B0AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C25E40C1-EE49-4AC7-9808-AF6400D0B0AE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56A192E4-0FEE-496A-BB48-B46CFA2CBADF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56A192E4-0FEE-496A-BB48-B46CFA2CBADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56A192E4-0FEE-496A-BB48-B46CFA2CBADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56A192E4-0FEE-496A-BB48-B46CFA2CBADF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD7D49C1-FDF6-40D9-A356-E32204C8F97A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD7D49C1-FDF6-40D9-A356-E32204C8F97A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD7D49C1-FDF6-40D9-A356-E32204C8F97A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD7D49C1-FDF6-40D9-A356-E32204C8F97A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1BF4A75F-A94D-4235-A40B-BD976D5CBDC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1BF4A75F-A94D-4235-A40B-BD976D5CBDC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1BF4A75F-A94D-4235-A40B-BD976D5CBDC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1BF4A75F-A94D-4235-A40B-BD976D5CBDC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78CD1BF0-510F-4CF1-BB12-4A0D964A03FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78CD1BF0-510F-4CF1-BB12-4A0D964A03FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78CD1BF0-510F-4CF1-BB12-4A0D964A03FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78CD1BF0-510F-4CF1-BB12-4A0D964A03FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC98A511-8192-48A7-A061-E2F51D47EFBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC98A511-8192-48A7-A061-E2F51D47EFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC98A511-8192-48A7-A061-E2F51D47EFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC98A511-8192-48A7-A061-E2F51D47EFBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFB41ED9-5EBB-489C-9ACC-FCEBAF9F5F65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFB41ED9-5EBB-489C-9ACC-FCEBAF9F5F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFB41ED9-5EBB-489C-9ACC-FCEBAF9F5F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFB41ED9-5EBB-489C-9ACC-FCEBAF9F5F65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2825316-22CC-410D-BF90-D34B08FBF6EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2825316-22CC-410D-BF90-D34B08FBF6EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2825316-22CC-410D-BF90-D34B08FBF6EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2825316-22CC-410D-BF90-D34B08FBF6EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41A91677-1F2A-41DF-B30C-204C9D1F9057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41A91677-1F2A-41DF-B30C-204C9D1F9057}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41A91677-1F2A-41DF-B30C-204C9D1F9057}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41A91677-1F2A-41DF-B30C-204C9D1F9057}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2BC7B6D-0AC0-455D-9EFF-F4BD56396A28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2BC7B6D-0AC0-455D-9EFF-F4BD56396A28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2BC7B6D-0AC0-455D-9EFF-F4BD56396A28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2BC7B6D-0AC0-455D-9EFF-F4BD56396A28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0317B54D-FF1F-48A4-9050-9E1013DC8196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0317B54D-FF1F-48A4-9050-9E1013DC8196}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0317B54D-FF1F-48A4-9050-9E1013DC8196}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0317B54D-FF1F-48A4-9050-9E1013DC8196}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{38858893-B8F3-4656-B4BA-5779C5648DB9} = {F26B3520-4DB8-43BC-A723-6CC6DC33D94C}
-		{C25E40C1-EE49-4AC7-9808-AF6400D0B0AE} = {F26B3520-4DB8-43BC-A723-6CC6DC33D94C}
-		{56A192E4-0FEE-496A-BB48-B46CFA2CBADF} = {F26B3520-4DB8-43BC-A723-6CC6DC33D94C}
-		{DD7D49C1-FDF6-40D9-A356-E32204C8F97A} = {260F93CF-D9CF-4E64-A104-FDD29C042CE2}
 		{3BC22888-A27E-4A76-A0B8-2C86B5DB28BD} = {F26B3520-4DB8-43BC-A723-6CC6DC33D94C}
-		{1BF4A75F-A94D-4235-A40B-BD976D5CBDC5} = {3BC22888-A27E-4A76-A0B8-2C86B5DB28BD}
-		{78CD1BF0-510F-4CF1-BB12-4A0D964A03FA} = {F26B3520-4DB8-43BC-A723-6CC6DC33D94C}
+		{EC98A511-8192-48A7-A061-E2F51D47EFBE} = {3BC22888-A27E-4A76-A0B8-2C86B5DB28BD}
+		{FFB41ED9-5EBB-489C-9ACC-FCEBAF9F5F65} = {F26B3520-4DB8-43BC-A723-6CC6DC33D94C}
+		{A2825316-22CC-410D-BF90-D34B08FBF6EC} = {F26B3520-4DB8-43BC-A723-6CC6DC33D94C}
+		{41A91677-1F2A-41DF-B30C-204C9D1F9057} = {F26B3520-4DB8-43BC-A723-6CC6DC33D94C}
+		{B2BC7B6D-0AC0-455D-9EFF-F4BD56396A28} = {F26B3520-4DB8-43BC-A723-6CC6DC33D94C}
+		{0317B54D-FF1F-48A4-9050-9E1013DC8196} = {260F93CF-D9CF-4E64-A104-FDD29C042CE2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {19374B53-F514-4FCE-9B84-35A2CF75BA45}
