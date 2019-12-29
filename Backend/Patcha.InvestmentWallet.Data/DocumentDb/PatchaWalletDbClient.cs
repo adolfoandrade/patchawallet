@@ -6,7 +6,8 @@ using MongoDB.Driver;
 using Patcha.InvestmentWallet.Domain.Documents;
 
 namespace Patcha.InvestmentWallet.Data.DocumentDb {
-    public class PatchaWalletDbClient {
+    public class PatchaWalletDbClient 
+    {
         #region Fields
         private const string STOCK_COLLECTION_ID = "stocks";
         private const string COIN_COLLECTION_ID = "coins";

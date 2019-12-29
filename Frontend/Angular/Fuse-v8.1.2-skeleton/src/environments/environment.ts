@@ -4,7 +4,8 @@
 
 export const environment = {
     production: false,
-    hmr       : false
+    hmr       : false,
+    bff       : "http://patchawalletapi-dev.azurewebsites.net"
 };
 
 /*

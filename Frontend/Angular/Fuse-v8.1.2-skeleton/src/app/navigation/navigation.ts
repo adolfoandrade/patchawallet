@@ -2,24 +2,34 @@ import { FuseNavigation } from '@fuse/types';
 
 export const navigation: FuseNavigation[] = [
     {
-        id       : 'applications',
-        title    : 'Applications',
-        translate: 'NAV.APPLICATIONS',
+        id       : 'dashboards',
+        title    : 'Dashboards',
+        translate: 'NAV.DASHBOARDS',
         type     : 'group',
         children : [
             {
-                id       : 'sample',
-                title    : 'Sample',
-                translate: 'NAV.SAMPLE.TITLE',
-                type     : 'item',
-                icon     : 'email',
-                url      : '/sample',
-                badge    : {
-                    title    : '25',
-                    translate: 'NAV.SAMPLE.BADGE',
-                    bg       : '#F44336',
-                    fg       : '#FFFFFF'
-                }
+                id: 'analytics',
+                title: 'Analytics',
+                translate: 'NAV.ANALYTICS.TITLE',
+                type: 'item',
+                icon: 'dashboard',
+                url: '/apps/analytics'
+            }
+        ]
+    },
+    {
+        id: 'forms',
+        title: 'Forms',
+        translate: 'NAV.FORMS',
+        type: 'group',
+        children: [
+            {
+                id: 'stocktransaction',
+                title: 'Stock Transaction',
+                translate: 'NAV.STOCKTRANSACTION.TITLE',
+                type: 'item',
+                icon: 'attach_money',
+                url: '/forms/stocktransaction'
             }
         ]
     }
