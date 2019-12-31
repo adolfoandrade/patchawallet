@@ -7,11 +7,9 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["PatchaWallet.Wallet.csproj", "PatchaWallet.Wallet/"]
 RUN dotnet restore "PatchaWallet.Wallet/PatchaWallet.Wallet.csproj"
-COPY . .
-WORKDIR "/PatchaWallet.Wallet"
 
 FROM build AS publish
-RUN dotnet publish "PatchaWallet.Wallet.csproj" -c Release -o /app/publish
+RUN dotnet publish "PatchaWallet.Wallet/PatchaWallet.Wallet.csproj" -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
 WORKDIR /app
