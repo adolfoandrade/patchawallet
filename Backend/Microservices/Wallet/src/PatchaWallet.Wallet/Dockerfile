@@ -10,10 +10,10 @@ RUN dotnet restore "PatchaWallet.Wallet/PatchaWallet.Wallet.csproj"
 COPY . .
 WORKDIR "/src/PatchaWallet.Wallet"
 
-FROM build AS publish
 RUN dotnet publish "PatchaWallet.Wallet.csproj" -c Release -o /app/publish
 
-FROM base AS final
+FROM microsoft/dotnet:aspnetcore-runtime AS runtime
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "PatchaWallet.Wallet.dll"]
+
