@@ -1,16 +1,19 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 
-# copy csproj and restore as distinct layers
-COPY aspnetapp/*.csproj ./aspnetapp/
-RUN dotnet restore
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+WORKDIR /src
+COPY ["PatchaWallet.Wallet/PatchaWallet.Wallet.csproj", "PatchaWallet.Wallet/"]
+RUN dotnet restore "PatchaWallet.Wallet/PatchaWallet.Wallet.csproj"
+COPY . .
+WORKDIR "/PatchaWallet.Wallet"
 
-# copy everything else and build app
-COPY aspnetapp/. ./aspnetapp/
-WORKDIR /app/aspnetapp
-RUN dotnet publish -c Release -o out
+FROM build AS publish
+RUN dotnet publish "PatchaWallet.Wallet.csproj" -c Release -o /app/publish
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
 WORKDIR /app
-COPY --from=build /app/aspnetapp/out ./
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "PatchaWallet.Wallet.dll"]
