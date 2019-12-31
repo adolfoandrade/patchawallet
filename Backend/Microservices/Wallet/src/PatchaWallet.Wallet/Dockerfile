@@ -9,7 +9,6 @@ COPY ["PatchaWallet.Wallet.csproj", "PatchaWallet.Wallet/"]
 RUN dotnet restore "PatchaWallet.Wallet/PatchaWallet.Wallet.csproj"
 COPY . .
 WORKDIR "/src/PatchaWallet.Wallet"
-RUN dotnet build "PatchaWallet.Wallet.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "PatchaWallet.Wallet.csproj" -c Release -o /app/publish
