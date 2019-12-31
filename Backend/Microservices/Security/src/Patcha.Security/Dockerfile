@@ -4,10 +4,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
 WORKDIR /src
-COPY ["src/Patcha.Security/Patcha.Security.csproj", "src/Patcha.Security/"]
-RUN dotnet restore "src/Patcha.Security/Patcha.Security.csproj"
+COPY ["Patcha.Security.csproj", "Patcha.Security/"]
+RUN dotnet restore "Patcha.Security/Patcha.Security.csproj"
 COPY . .
-WORKDIR "/src/src/Patcha.Security"
+WORKDIR "/src/Patcha.Security"
 RUN dotnet build "Patcha.Security.csproj" -c Release -o /app/build
 
 FROM build AS publish
