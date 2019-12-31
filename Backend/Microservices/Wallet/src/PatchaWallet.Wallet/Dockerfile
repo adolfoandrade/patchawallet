@@ -5,7 +5,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["PatchaWallet.Wallet/PatchaWallet.Wallet.csproj", "PatchaWallet.Wallet/"]
+COPY ["PatchaWallet.Wallet.csproj", "PatchaWallet.Wallet/"]
 RUN dotnet restore "PatchaWallet.Wallet/PatchaWallet.Wallet.csproj"
 COPY . .
 WORKDIR "/PatchaWallet.Wallet"
