@@ -7,6 +7,6 @@ namespace PatchaWallet.Wallet
 {
     public interface IWalletService : IDisposable
     {
-        Task<SimulateGoalVM> AddAsync(SimulateGoalVM simulateGoalVM);
+        Task<SimulateGoalResultVM> AddAsync(SimulateGoalVM simulateGoalVM);
     }
 }

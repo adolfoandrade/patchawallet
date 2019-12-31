@@ -12,6 +12,7 @@ namespace PatchaWallet.Wallet
                 Id = simulateGoalVM.Id,
                 AnnualPercente = simulateGoalVM.AnnualPercente,
                 BeginValue = simulateGoalVM.BeginValue,
+                DateKind = simulateGoalVM.DateKind,
                 Contributions = simulateGoalVM.Contributions?.ToDocument()
             };
             return document;
@@ -33,8 +34,7 @@ namespace PatchaWallet.Wallet
             {
                 Id = contributionVM.Id,
                 Value = contributionVM.Value,
-                DateKind = contributionVM.DateKind,
-                DateKindValue = contributionVM.DateKindValue
+                Date = contributionVM.Date
             };
             return document;
         }

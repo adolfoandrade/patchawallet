@@ -7,6 +7,7 @@ namespace PatchaWallet.Wallet
         public string Id { get; set; }
         public double AnnualPercente { get; set; }
         public decimal BeginValue { get; set; }
+        public DateKindEnum DateKind { get; set; }
         public List<ContributionDocument> Contributions { get; set; }
     }
 }

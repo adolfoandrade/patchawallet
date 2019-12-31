@@ -9,20 +9,28 @@ using Microsoft.Extensions.Logging;
 namespace PatchaWallet.Wallet
 {
     [ApiVersion("1")]
-    [Route("api/v{version:apiVersion}/wallets")]
+    [Route("api/v{version:apiVersion}/wallet/simulate")]
     [ApiController]
     //[Authorize]
-    public class WalletsController : ControllerBase
+    public class SimulateController : ControllerBase
     {
         private readonly IWalletService _walletService;
 
-        public WalletsController(IWalletService walletService)
+        public SimulateController(IWalletService walletService)
         {
             _walletService = walletService;
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(SimulateGoalVM simulateGoalVM)
+        {
+            var result = await _walletService.AddAsync(simulateGoalVM);
+
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(string id, SimulateGoalVM simulateGoalVM)
         {
             var result = await _walletService.AddAsync(simulateGoalVM);
 

@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using System;
 
 namespace PatchaWallet.Wallet
 {
@@ -11,7 +12,6 @@ namespace PatchaWallet.Wallet
 
         public string Id { get; set; }
         public decimal Value { get; set; }
-        public DateKindEnum DateKind { get; set; }
-        public int DateKindValue { get; set; }
+        public DateTime Date { get; set; }
     }
 }

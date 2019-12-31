@@ -8,7 +8,7 @@ using Xunit;
 
 namespace PatchaWallet.Wallet.UnitTest
 {
-    public class FixtureHandler
+    public class FixtureHandler : FixtureBase
     {
         private readonly Mock<ICreateHandler<SimulateGoalVM>> _mockCreateHandler;
         private readonly Mock<IDocumentDbClient> _mockDocumentDbClient;

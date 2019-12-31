@@ -6,7 +6,7 @@ using Xunit;
 
 namespace PatchaWallet.Wallet.UnitTest
 {
-    public class FixtureController
+    public class FixtureController : FixtureBase
     {
         private readonly Mock<IWalletService> _mockWalletService;
 
@@ -20,10 +20,11 @@ namespace PatchaWallet.Wallet.UnitTest
         {
             // Arrange
             var vm = new SimulateGoalVM();
-            _mockWalletService.Setup(x => x.AddAsync(vm)).ReturnsAsync(vm);
+            var responseVM = new SimulateGoalResultVM();
+            _mockWalletService.Setup(x => x.AddAsync(vm)).ReturnsAsync(responseVM);
 
             // Action
-            var _sut = new WalletsController(_mockWalletService.Object);
+            var _sut = new SimulateController(_mockWalletService.Object);
             var result = _sut.Post(vm).Result;
 
             // Assert

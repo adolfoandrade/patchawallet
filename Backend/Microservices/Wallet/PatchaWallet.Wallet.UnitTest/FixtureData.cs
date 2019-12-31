@@ -7,7 +7,7 @@ using Xunit;
 
 namespace PatchaWallet.Wallet.UnitTest
 {
-    public class FixtureData
+    public class FixtureData : FixtureBase
     {
         private readonly Mock<IDocumentDbClient> _mockDocumentDbClient;
         private readonly Mock<IDocumentCollection<SimulateGoalDocument>> _mockDocumentCollection;
