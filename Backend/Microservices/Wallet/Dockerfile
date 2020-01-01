@@ -4,7 +4,7 @@ WORKDIR /repo
 
 COPY PatchaWallet.Wallet.sln .
 COPY src/PatchaWallet.Wallet/PatchaWallet.Wallet.csproj ./src/PatchaWallet.Wallet/PatchaWallet.Wallet.csproj
-COPY test/PatchaWallet.Wallet.UnitTest/PatchaWallet.Wallet.UnitTest.csproj ./src/PatchaWallet.Wallet.UnitTest/PatchaWallet.Wallet.UnitTest.csproj
+COPY test/PatchaWallet.Wallet.UnitTest/PatchaWallet.Wallet.UnitTest.csproj ./test/PatchaWallet.Wallet.UnitTest/PatchaWallet.Wallet.UnitTest.csproj
 
 RUN dotnet restore
 
