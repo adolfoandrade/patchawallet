@@ -12,7 +12,5 @@ RUN dotnet publish -c Release -o /app
 # STAGE03 - Create the final image
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
 WORKDIR /app
-LABEL Author="Gaurav Gahlot"
-LABEL Maintainer="quickdevnotes"
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "PatchaWallet.Wallet.dll", "--server.urls", "http://*:80"]
+ENTRYPOINT ["dotnet", "PatchaWallet.Wallet.dll"]
