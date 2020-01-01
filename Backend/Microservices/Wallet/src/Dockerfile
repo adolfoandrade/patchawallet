@@ -1,16 +1,17 @@
-# STAGE01 - Build application and its dependencies
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build-dev
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
-COPY PatchaWallet.Wallet/*.csproj ./
-COPY . ./
-RUN dotnet restore 
+EXPOSE 80
+EXPOSE 443
 
-# STAGE02 - Publish the application
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build-dev
+WORKDIR /src
+COPY ["PatchaWallet.Wallet/PatchaWallet.Wallet.csproj", "PatchaWallet.Wallet/"]
+RUN dotnet restore "PatchaWallet.Wallet/PatchaWallet.Wallet.csproj"
+
 FROM build-dev AS publish
-RUN dotnet publish -c Release -o /app
+RUN dotnet publish "PatchaWallet.Wallet/PatchaWallet.Wallet.csproj" -c Release -o /app/publish
 
-# STAGE03 - Create the final image
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
 WORKDIR /app
-COPY --from=publish /app .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "PatchaWallet.Wallet.dll"]
