@@ -22,8 +22,8 @@ namespace Patcha.Security
         {
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile($"{nameof(AppSettings)}.json")
-                .AddJsonFile($"{nameof(AppSettings)}.{environment.EnvironmentName}.json", true)
+                .AddJsonFile($"appsettings.json")
+                .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", true)
                 .AddEnvironmentVariables()
                 .Build();
 
@@ -51,7 +51,7 @@ namespace Patcha.Security
             application.UseSwagger();
             application.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "PATCHAWALLET SECURITY API V1");
             });
         }
 
@@ -86,7 +86,7 @@ namespace Patcha.Security
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Info { Title = "Protected API", Version = "v1" });
+                options.SwaggerDoc("v1", new Info { Title = "PATCHAWALLET SECURITY API", Version = "v1" });
             });
 
             ///.AddCorsPolicyService<CorsPoliceService>()

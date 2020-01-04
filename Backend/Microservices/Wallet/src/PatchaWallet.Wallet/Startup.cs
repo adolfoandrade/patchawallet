@@ -56,7 +56,7 @@ namespace PatchaWallet.Wallet
                     {
                         Version = "v1",
                         Description = "v1 API Description",
-                        Title = "V1 INVESTMENT WALLET WALLET API"
+                        Title = "WALLET API V1"
                     }
                 );
                 swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -107,7 +107,7 @@ namespace PatchaWallet.Wallet
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "INVESTMENT WALLET API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "WALLET API");
                 c.OAuthClientId("client");
                 c.OAuthAppName("Client");
             });
