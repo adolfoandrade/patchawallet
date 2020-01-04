@@ -27,6 +27,13 @@ namespace PatchaWallet.Wallet
             GC.SuppressFinalize(true);
         }
 
+        public async Task<SimulateGoalResultVM> GetAsync(string id)
+        {
+            var request = await _mediator.Send(new GetSingleRequest<SimulateGoalVM>(id));
+            var response = Simulate(request);
+            return response;
+        }
+
         private SimulateGoalResultVM Simulate(SimulateGoalVM simulateGoalVM)
         {
             SimulateGoalResultVM simulateGoalResultVM = new SimulateGoalResultVM();
@@ -79,5 +86,6 @@ namespace PatchaWallet.Wallet
             simulateGoalResultVM.FinalGoal = simulateGoalResultVM.Goals.LastOrDefault();
             return simulateGoalResultVM;
         }
+
     }
 }

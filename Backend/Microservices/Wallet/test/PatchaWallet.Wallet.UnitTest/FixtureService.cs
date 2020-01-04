@@ -1,4 +1,5 @@
 using MediatR;
+using MongoDB.Bson;
 using Moq;
 using System;
 using System.Threading;
@@ -59,6 +60,24 @@ namespace PatchaWallet.Wallet.UnitTest
             // Action
             var _sut = new WalletService(_mockMediator.Object);
             var result = _sut.AddAsync(vm).Result;
+            _sut.Dispose();
+
+            // Assert
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void Get_simulate_goal_should()
+        {
+            // Arrange
+            var mockVM = LoadJson<SimulateGoalVM>("SimulateMonthGoal");
+            var id = ObjectId.GenerateNewId().ToString();
+            mockVM.Id = id;
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetSingleRequest<SimulateGoalVM>>(), default(CancellationToken))).ReturnsAsync(mockVM);
+
+            // Action
+            var _sut = new WalletService(_mockMediator.Object);
+            var result = _sut.GetAsync(id).Result;
             _sut.Dispose();
 
             // Assert

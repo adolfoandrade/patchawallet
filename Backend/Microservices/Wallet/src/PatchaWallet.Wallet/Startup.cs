@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using IdentityServer4.AccessTokenValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -34,6 +35,7 @@ namespace PatchaWallet.Wallet
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthorization();
             services.AddControllers();
             services.AddMongoDb(Configuration);
             services.AddMediatR(typeof(Startup).Assembly);
@@ -57,8 +59,41 @@ namespace PatchaWallet.Wallet
                         Title = "V1 INVESTMENT WALLET WALLET API"
                     }
                 );
+                swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+                swagger.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
 
+                        },
+                        new List<string>()
+                    }
+                });
             });
+
+            services.AddAuthentication("Bearer")
+                    .AddIdentityServerAuthentication(options =>
+                    {
+                        options.Authority = "http://localhost:55000";
+                        options.RequireHttpsMetadata = false;
+                        options.ApiName = "api";
+                    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,6 +108,8 @@ namespace PatchaWallet.Wallet
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "INVESTMENT WALLET API");
+                c.OAuthClientId("client");
+                c.OAuthAppName("Client");
             });
 
             app.UseHttpsRedirection();

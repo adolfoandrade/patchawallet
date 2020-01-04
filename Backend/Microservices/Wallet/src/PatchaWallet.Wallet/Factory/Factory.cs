@@ -18,6 +18,19 @@ namespace PatchaWallet.Wallet
             return document;
         }
 
+        public static SimulateGoalVM ToVM(this SimulateGoalDocument document)
+        {
+            var vm = new SimulateGoalVM()
+            {
+                Id = document.Id,
+                AnnualPercente = document.AnnualPercente,
+                BeginValue = document.BeginValue,
+                DateKind = document.DateKind,
+                Contributions = document.Contributions?.ToVM()
+            };
+            return vm;
+        }
+
         public static List<ContributionDocument> ToDocument(this List<ContributionVM> contributions)
         {
             List<ContributionDocument> documents = new List<ContributionDocument>();
@@ -26,6 +39,16 @@ namespace PatchaWallet.Wallet
                 documents.Add(item.ToDocument());
             }
             return documents;
+        }
+
+        public static List<ContributionVM> ToVM(this List<ContributionDocument> contributions)
+        {
+            List<ContributionVM> vms = new List<ContributionVM>();
+            foreach (var item in contributions)
+            {
+                vms.Add(item.ToVM());
+            }
+            return vms;
         }
 
         public static ContributionDocument ToDocument(this ContributionVM contributionVM)
@@ -37,6 +60,17 @@ namespace PatchaWallet.Wallet
                 Date = contributionVM.Date
             };
             return document;
+        }
+
+        public static ContributionVM ToVM(this ContributionDocument document)
+        {
+            var vm = new ContributionVM()
+            {
+                Id = document.Id,
+                Value = document.Value,
+                Date = document.Date
+            };
+            return vm;
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +11,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Logging;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Patcha.Security
 {
@@ -37,11 +40,19 @@ namespace Patcha.Security
             {
                 application.UseDeveloperExceptionPage();
                 application.UseDatabaseErrorPage();
+                IdentityModelEventSource.ShowPII = true;
             }
 
             application.UseIdentityServer();
             application.UseStaticFiles();
             application.UseMvcWithDefaultRoute();
+            application.UseAuthentication();
+            
+            application.UseSwagger();
+            application.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -70,7 +81,13 @@ namespace Patcha.Security
                 .AddClientStore()
                 .AddResourceStore()
                 .AddAspNetIdentity<ApplicationUser>()
+                //.AddDeveloperSigningCredential();
                 .AddCertificate(appSettings, Environment);
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Info { Title = "Protected API", Version = "v1" });
+            });
 
             ///.AddCorsPolicyService<CorsPoliceService>()
             ///.AddProfileService<ProfileService>()

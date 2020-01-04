@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Patcha.Security
 {
-    public class BackgroundHostedService : IHostedService, IDisposable
+    public sealed class BackgroundHostedService : IHostedService, IDisposable
     {
         public BackgroundHostedService(ILogger<BackgroundHostedService> logger)
         {
