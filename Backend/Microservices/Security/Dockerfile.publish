@@ -1,4 +1,7 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
+EXPOSE 27017
+EXPOSE 80
+EXPOSE 443
 
 WORKDIR /repo
 
