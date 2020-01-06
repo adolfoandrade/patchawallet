@@ -81,8 +81,8 @@ namespace Patcha.Security
                 .AddClientStore()
                 .AddResourceStore()
                 .AddAspNetIdentity<ApplicationUser>()
-                //.AddDeveloperSigningCredential();
-                .AddCertificate(appSettings, Environment);
+                .AddDeveloperSigningCredential();
+                //.AddCertificate(appSettings, Environment);
 
             services.AddSwaggerGen(options =>
             {
