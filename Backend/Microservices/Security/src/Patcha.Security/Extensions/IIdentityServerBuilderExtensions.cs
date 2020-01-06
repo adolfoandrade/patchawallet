@@ -15,7 +15,8 @@ namespace Patcha.Security
         public static IIdentityServerBuilder AddCertificate(this IIdentityServerBuilder builder, AppSettings appSettings, IHostingEnvironment environment)
         {
             X509Certificate2 certificate = null;
-
+            certificate = new X509Certificate2(Path.Combine(environment.ContentRootPath, "PatchaSecurity.pfx"), "", X509KeyStorageFlags.MachineKeySet);
+            /*
             if (environment.IsDevelopment())
             {
                 certificate = new X509Certificate2(Path.Combine(environment.ContentRootPath, "PatchaSecurity.pfx"), "", X509KeyStorageFlags.MachineKeySet);
@@ -33,7 +34,7 @@ namespace Patcha.Security
                         certificate = collection[0];
                     }
                 }
-            }
+            }*/
 
             if (certificate == null)
             {
