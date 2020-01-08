@@ -42,7 +42,7 @@
 
   <ItemGroup>
     <None Update="PatchaSecurity.pfx">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
