@@ -40,7 +40,6 @@ namespace Patcha.Security
             {
                 application.UseDeveloperExceptionPage();
                 application.UseDatabaseErrorPage();
-                //IdentityModelEventSource.ShowPII = true;
             }
 
             application.UseIdentityServer();
@@ -66,7 +65,6 @@ namespace Patcha.Security
 
             services.AddHostedService<BackgroundHostedService>();
 
-            // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
@@ -82,22 +80,11 @@ namespace Patcha.Security
                 .AddResourceStore()
                 .AddAspNetIdentity<ApplicationUser>()
                 .AddDeveloperSigningCredential();
-                //.AddSigningCredential(Certificate.Get());
 
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Info { Title = "PATCHAWALLET SECURITY API", Version = "v1" });
             });
-
-            ///.AddCorsPolicyService<CorsPoliceService>()
-            ///.AddProfileService<ProfileService>()
-
-            ///.AddAuthorizeInteractionResponseGenerator<AuthorizeInteractionResponseGenerator>()
-            ///.AddCustomAuthorizeRequestValidator<CustomAuthorizeRequestValidator>()
-            ///.AddCustomTokenRequestValidator<CustomTokenRequestValidator>()
-            ///.AddExtensionGrantValidator<ExtensionGrantValidator>()
-            ///.AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
-            ///.AddSecretValidator<SecretValidator>();
         }
 
     }
