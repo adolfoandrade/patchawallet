@@ -40,7 +40,7 @@ namespace Patcha.Security
             {
                 application.UseDeveloperExceptionPage();
                 application.UseDatabaseErrorPage();
-                IdentityModelEventSource.ShowPII = true;
+                //IdentityModelEventSource.ShowPII = true;
             }
 
             application.UseIdentityServer();
@@ -82,7 +82,7 @@ namespace Patcha.Security
                 .AddResourceStore()
                 .AddAspNetIdentity<ApplicationUser>()
                 .AddDeveloperSigningCredential();
-                //.AddCertificate(appSettings, Environment);
+                //.AddSigningCredential(Certificate.Get());
 
             services.AddSwaggerGen(options =>
             {
