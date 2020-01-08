@@ -26,6 +26,7 @@ namespace PatchaWallet.Wallet
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Get(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -40,6 +41,7 @@ namespace PatchaWallet.Wallet
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Post(SimulateGoalVM simulateGoalVM)
         {
             var result = await _walletService.AddAsync(simulateGoalVM);
@@ -51,6 +53,7 @@ namespace PatchaWallet.Wallet
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Put(string id, SimulateGoalVM simulateGoalVM)
         {
             var result = await _walletService.AddAsync(simulateGoalVM);
