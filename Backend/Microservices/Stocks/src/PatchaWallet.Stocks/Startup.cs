@@ -18,9 +18,15 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using IdentityServer4.AccessTokenValidation;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using System.Net.Mime;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PatchaWallet.Stocks
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -38,6 +44,8 @@ namespace PatchaWallet.Stocks
             services.AddMediatR(typeof(Startup).Assembly);
             services.AddApiVersioning();
 
+            services.AddHealthChecks();
+
             // ASP.NET HttpContext dependency
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -46,9 +54,8 @@ namespace PatchaWallet.Stocks
 
             services.AddScoped<IUser, AspNetUser>();
             services.AddScoped<IStockService, StockService>();
-            services.AddTransient<HttpClient>();
-            services.AddTransient<ISymbolSearchService, SymbolSearchService>();
-            services.AddTransient<IGlobalQuoteService, GlobalQuoteService>();
+            services.AddHttpClient<ISymbolSearchService, SymbolSearchService>();
+            services.AddHttpClient<IGlobalQuoteService, GlobalQuoteService>();
             services.AddScoped<ITransactionService, TransactionService>();
             services.AddScoped<IDomainNotificationHandler<DomainNotification>, DomainNotificationHandler>();
             services.AddScoped<IUserService, UserService>();
@@ -95,6 +102,8 @@ namespace PatchaWallet.Stocks
                 });
             });
 
+            // prevent from mapping "sub" claim to nameidentifier.
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
             var identityUrl = "https://patchawalletapisecuritydev.azurewebsites.net";
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
             .AddIdentityServerAuthentication(options =>
@@ -108,31 +117,47 @@ namespace PatchaWallet.Stocks
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "STOCK API");
             });
 
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseAuthentication();
-
-            app.UseMongoDbStorage();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            //app.UseMongoDbStorage();
+
+            app.UseHealthChecks("/hc",
+               new HealthCheckOptions
+               {
+                   ResponseWriter = async (context, report) =>
+                   {
+                       var result = JsonConvert.SerializeObject(
+                           new
+                           {
+                               environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"),
+                               status = report.Status.ToString(),
+                               services = report.Entries.Select(e => new { key = e.Key, value = Enum.GetName(typeof(HealthStatus), e.Value.Status) })
+                           });
+                       context.Response.ContentType = MediaTypeNames.Application.Json;
+                       await context.Response.WriteAsync(result);
+                   }
+               });
         }
 
     }

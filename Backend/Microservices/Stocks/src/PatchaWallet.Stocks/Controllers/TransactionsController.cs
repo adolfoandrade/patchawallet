@@ -36,7 +36,7 @@ namespace PatchaWallet.Stocks
         }
 
         [HttpPost("cei")]
-        //[DisableFormValueModelBinding]
+        [ApiExplorerSettings(GroupName = "v1")]
         public async Task<IActionResult> ImportFromCEI()
         {
             IFormFile file = Request.Form.Files[0];
@@ -55,6 +55,7 @@ namespace PatchaWallet.Stocks
         }
 
         [HttpGet("{id}")]
+        [ApiExplorerSettings(GroupName = "v1")]
         public async Task<IActionResult> Get(string id)
         {
             var stock_transaction = await _transactionService.GetAsync(id);
@@ -66,6 +67,7 @@ namespace PatchaWallet.Stocks
         }
 
         [HttpPost]
+        [ApiExplorerSettings(GroupName = "v1")]
         public async Task<IActionResult> Post(CreateOrUpdateStockTransactionVM createOrUpdateStockTransactionVM)
         {
             var stock_trasaction = await _transactionService.CreateAsync(createOrUpdateStockTransactionVM);
@@ -77,6 +79,7 @@ namespace PatchaWallet.Stocks
         }
 
         [HttpPut("{id}")]
+        [ApiExplorerSettings(GroupName = "v1")]
         public async Task<IActionResult> Put(string id, CreateOrUpdateStockTransactionVM createOrUpdateStockTransactionVM)
         {
             createOrUpdateStockTransactionVM.Id = id;
@@ -89,6 +92,7 @@ namespace PatchaWallet.Stocks
         }
 
         [HttpDelete("{id}")]
+        [ApiExplorerSettings(GroupName = "v1")]
         public async Task<IActionResult> Delete(string id)
         {
             await _transactionService.DeleteAsync(id);

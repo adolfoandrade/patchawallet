@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace PatchaWallet.Stocks
 {
-    public class GetStockTradeHandler : IGetCollectionHandler<StockTransactionVM>
+    public class GetStockTransactionHandler : IGetCollectionHandler<StockTransactionVM>
     {
         private readonly PatchaWalletDbClient _client;
 
-        public GetStockTradeHandler(PatchaWalletDbClient client)
+        public GetStockTransactionHandler(PatchaWalletDbClient client)
         {
             _client = client;
         }
@@ -18,7 +18,7 @@ namespace PatchaWallet.Stocks
         {
             return Task.Factory.StartNew(() => {
                 var documents = _client.StockTransactions.GetDocumentQuery();
-                return documents.ToVM();
+                return documents.ToList().ToVM().AsEnumerable();
             });
         }
     }

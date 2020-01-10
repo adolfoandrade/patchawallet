@@ -22,6 +22,7 @@ namespace PatchaWallet.Stocks
         }
 
         [HttpGet("{pageSize}/{nextCursor}")]
+        [ApiExplorerSettings(GroupName = "v1")]
         public async Task<IActionResult> Get(int pageSize = 10, int nextCursor = 0, string search = "")
         {
             var result = await _stockService.GetStocksAsync(pageSize, nextCursor, search);
@@ -40,6 +41,7 @@ namespace PatchaWallet.Stocks
         }
 
         [HttpPost]
+        [ApiExplorerSettings(GroupName = "v1")]
         public async Task<IActionResult> Post(StockVM stock)
         {
             var result = await _stockService.AddStockAsync(stock);
@@ -47,6 +49,7 @@ namespace PatchaWallet.Stocks
         }
 
         [HttpPost("add/range")]
+        [ApiExplorerSettings(GroupName = "v1")]
         public async Task<IActionResult> PostRange([FromBody]IEnumerable<StockVM> stocks)
         {
             if (!stocks.Any())

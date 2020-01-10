@@ -155,11 +155,6 @@ namespace PatchaWallet.Stocks
             return stockTransactions;
         }
 
-        public static IEnumerable<StockTransactionVM> ToVM(this IEnumerable<StockTransactionDocument> stockTransactions)
-        {
-            return stockTransactions.ToVM();
-        }
-
         public static IEnumerable<StockTransactionDocument> ToDocument(this IEnumerable<StockTransactionVM> stockTransactionsVM)
         {
             return stockTransactionsVM.ToDocument();

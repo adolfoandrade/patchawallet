@@ -163,7 +163,7 @@ namespace PatchaWallet.Stocks
                 string sFileExtension = Path.GetExtension(file.FileName).ToLower();
                 ISheet sheet;
                 string fullPath = Path.Combine(newPath, file.FileName);
-                using (var stream = new FileStream(fullPath, FileMode.Create))
+                using (var stream = new MemoryStream())
                 {
                     file.CopyTo(stream);
                     stream.Position = 0;
