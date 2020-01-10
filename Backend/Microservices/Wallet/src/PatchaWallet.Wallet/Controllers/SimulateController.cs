@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PatchaWallet.Wallet.AspNetIdentity;
 
 namespace PatchaWallet.Wallet
 {
@@ -17,16 +18,20 @@ namespace PatchaWallet.Wallet
     public class SimulateController : ControllerBase
     {
         private readonly IWalletService _walletService;
+        private readonly IUser _user;
 
-        public SimulateController(IWalletService walletService)
+        public SimulateController(IWalletService walletService,
+            IUser user)
         {
             _walletService = walletService;
+            _user = user;
         }
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ApiExplorerSettings(GroupName = "v1")]
+        [ProducesResponseType(typeof(SimulateGoalResultVM), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(int), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(int), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Get(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -38,22 +43,26 @@ namespace PatchaWallet.Wallet
         }
 
         [HttpPost]
+        [ApiExplorerSettings(GroupName = "v1")]
         [Consumes(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(SimulateGoalResultVM), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(DomainNotification), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(int), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Post(SimulateGoalVM simulateGoalVM)
         {
+            var user = _user.Name;
+
             var result = await _walletService.AddAsync(simulateGoalVM);
 
             return Ok(result);
         }
 
         [HttpPut]
+        [ApiExplorerSettings(GroupName = "v1")]
         [Consumes(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(SimulateGoalResultVM), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(DomainNotification), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(int), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Put(string id, SimulateGoalVM simulateGoalVM)
         {
             var result = await _walletService.AddAsync(simulateGoalVM);

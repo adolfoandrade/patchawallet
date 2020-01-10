@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PatchaWallet.Stocks
 {
-    public class GetStockHandler : IGetCollectionHandler<Stock>
+    public class GetStockHandler : IGetCollectionHandler<StockVM>
     {
         private readonly PatchaWalletDbClient _client;
 
@@ -16,10 +16,10 @@ namespace PatchaWallet.Stocks
             _client = client;
         }
 
-        public Task<IEnumerable<Stock>> Handle(GetCollectionRequest<Stock> request, CancellationToken cancellationToken)
+        public Task<IEnumerable<StockVM>> Handle(GetCollectionRequest<StockVM> request, CancellationToken cancellationToken)
         {
             return Task.Factory.StartNew(() => {
-                return _client.StocksCollection.GetDocumentQuery().AsEnumerable();
+                return _client.Stocks.GetDocumentQuery().ToList().ToVM().AsEnumerable();
             });
         }
 

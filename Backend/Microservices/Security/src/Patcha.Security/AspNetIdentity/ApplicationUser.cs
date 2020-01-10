@@ -4,7 +4,7 @@ using System;
 
 namespace Patcha.Security
 {
-    [CollectionName("user")]
+    [CollectionName("users")]
     public class ApplicationUser : MongoIdentityUser<string>
     {
         public ApplicationUser()

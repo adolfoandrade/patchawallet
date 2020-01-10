@@ -19,12 +19,13 @@ namespace PatchaWallet.Stocks
 
         public async Task<StockVM> Handle(CreateRequest<StockVM> request, CancellationToken cancellationToken)
         {
-            Stock stock = request.Item.ToEntity();
+            StockDocument stock = request.Item.ToDocument();
             stock.Id = ObjectId.GenerateNewId().ToString();
 
-            await _client.StocksCollection.CreateDocumentAsync(stock);
+            await _client.Stocks.CreateDocumentAsync(stock);
 
-            var stockVM = stock.ToVM();
+            request.Item.Id = stock.Id;
+            var stockVM = request.Item;
 
             return stockVM;
         }

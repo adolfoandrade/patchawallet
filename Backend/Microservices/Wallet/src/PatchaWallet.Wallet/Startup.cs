@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using IdentityServer4.AccessTokenValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -22,6 +23,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using PatchaWallet.Wallet.AspNetIdentity;
+using PatchaWallet.Wallet.AspNetIdentity.Authorization;
 
 namespace PatchaWallet.Wallet
 {
@@ -46,7 +49,14 @@ namespace PatchaWallet.Wallet
 
             services.AddHealthChecks();
 
+            // ASP.NET HttpContext dependency
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            // ASP.NET Authorization Polices
+            services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>();
+
             services.AddScoped<IWalletService, WalletService>();
+            services.AddScoped<IUser, AspNetUser>();
 
             // Angular's default header name for sending the XSRF token.
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");

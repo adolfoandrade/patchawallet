@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDbGenericRepository.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -174,7 +175,7 @@ namespace Patcha.Security
 
         private IMongoCollection<T> Collection<T>()
         {
-            return Database.GetCollection<T>(typeof(T).Name);
+            return Database.GetCollection<T>(typeof(T).Name.Pluralize().ToLower());
         }
     }
 

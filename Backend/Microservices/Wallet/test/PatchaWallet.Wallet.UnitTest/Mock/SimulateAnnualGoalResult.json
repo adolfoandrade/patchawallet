@@ -1,35 +1,55 @@
 {
+  "id": null,
   "annualPercente": 15,
   "beginValue": 32000,
-  "dateKind": 0,
-  "contributions": [
+  "goals": [
     {
-      "value": 20000,
-      "date": "2020-01-01"
+      "date": "2020-01-01T00:00:00",
+      "currentValue": 32000,
+      "contribution": 20000,
+      "goal": 59800
     },
     {
-      "value": 20000,
-      "date": "2021-01-01"
+      "date": "2021-01-01T00:00:00",
+      "currentValue": 59800,
+      "contribution": 20000,
+      "goal": 91770
     },
     {
-      "value": 20000,
-      "date": "2022-01-01"
+      "date": "2022-01-01T00:00:00",
+      "currentValue": 91770,
+      "contribution": 20000,
+      "goal": 128535.5
     },
     {
-      "value": 20000,
-      "date": "2023-01-01"
+      "date": "2023-01-01T00:00:00",
+      "currentValue": 128535.5,
+      "contribution": 20000,
+      "goal": 170815.825
     },
     {
-      "value": 20000,
-      "date": "2024-01-01"
+      "date": "2024-01-01T00:00:00",
+      "currentValue": 170815.825,
+      "contribution": 20000,
+      "goal": 219438.19875
     },
     {
-      "value": 20000,
-      "date": "2025-01-01"
+      "date": "2025-01-01T00:00:00",
+      "currentValue": 219438.19875,
+      "contribution": 20000,
+      "goal": 275353.9285625
     },
     {
-      "value": 20000,
-      "date": "2026-01-01"
+      "date": "2026-01-01T00:00:00",
+      "currentValue": 275353.9285625,
+      "contribution": 20000,
+      "goal": 339657.017846875
     }
-  ]
+  ],
+  "finalGoal": {
+    "date": "2026-01-01T00:00:00",
+    "currentValue": 275353.9285625,
+    "contribution": 20000,
+    "goal": 339657.017846875
+  }
 }

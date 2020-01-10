@@ -23,15 +23,13 @@ namespace PatchaWallet.Stocks
 
         public async Task<StockVM> GetStockAsync(string id)
         {
-            Stock stock = await _mediator.Send(new GetSingleRequest<Stock>(id));
-            var stockVM = stock.ToVM();
+            StockVM stockVM = await _mediator.Send(new GetSingleRequest<StockVM>(id));
             return stockVM;
         }
 
         public async Task<IEnumerable<StockVM>> GetStocksAsync(int pageSize = 10, int nextCursor = 0, string search = "")
         {
-            var collection = await _mediator.Send(new GetCollectionRequest<Stock>(pageSize, nextCursor, search));
-            var vm = collection.ToVM();
+            var vm = await _mediator.Send(new GetCollectionRequest<StockVM>(pageSize, nextCursor, search));
             return vm;
         }
 

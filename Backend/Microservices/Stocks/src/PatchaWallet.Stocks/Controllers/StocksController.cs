@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PatchaWallet.Stocks
@@ -10,6 +11,7 @@ namespace PatchaWallet.Stocks
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/stocks")]
     [ApiController]
+    [Authorize]
     public class StocksController : ControllerBase
     {
         private readonly IStockService _stockService;

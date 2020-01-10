@@ -25,6 +25,15 @@ namespace Patcha.Security
                 },
                 new ApiResource
                 {
+                    Name = "stocks",
+                    Description = "Stocks Service",
+                    DisplayName = "Stocks",
+                    Scopes = { new Scope("stocks") },
+                    ApiSecrets = { new Secret("secret".Sha512()) },
+                    UserClaims = new[] { JwtClaimTypes.Name, JwtClaimTypes.Role, "office" }
+                },
+                new ApiResource
+                {
                     Name = "trades",
                     Description = "Trades Service",
                     DisplayName = "TradesService",
@@ -55,6 +64,20 @@ namespace Patcha.Security
                 },
                 new Client
                 {
+                    ClientId = "stocks",
+                    ClientName = "Stocks",
+                    ClientSecrets = { new Secret("secret".Sha512()) },
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId, "stocks" },
+                    RequireConsent = false,
+                    AllowAccessTokensViaBrowser = true,
+                    AllowOfflineAccess = true,
+                    AlwaysSendClientClaims = true,
+                    AccessTokenType = AccessTokenType.Jwt,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+                    AccessTokenLifetime = 60 * 60 * 24,
+                },
+                new Client
+                {
                     ClientId = "trade",
                     ClientName = "Trade",
                     ClientSecrets = { new Secret("secret".Sha512()) },
@@ -72,9 +95,13 @@ namespace Patcha.Security
 
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
-            return new[]
+            return new List<IdentityResource>
             {
-                new IdentityResources.OpenId()
+                new IdentityResources.OpenId(),
+                new IdentityResources.Email(),
+                new IdentityResources.Profile(),
+                new IdentityResources.Phone(),
+                new IdentityResources.Address()
             };
         }
 

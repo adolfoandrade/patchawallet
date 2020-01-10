@@ -7,7 +7,7 @@ namespace PatchaWallet.Stocks
 {
     public static class Factory
     {
-        public static StockVM ToVM(this Stock stock)
+        public static StockVM ToVM(this StockDocument stock)
         {
             var stockVM = new StockVM()
             {
@@ -26,9 +26,9 @@ namespace PatchaWallet.Stocks
             return stockVM;
         }
 
-        public static Stock ToEntity(this StockVM stockVM)
+        public static StockDocument ToDocument(this StockVM stockVM)
         {
-            var stock = new Stock()
+            var stock = new StockDocument()
             {
                 Id = stockVM.Id,
                 Name = stockVM.Name,
@@ -45,7 +45,7 @@ namespace PatchaWallet.Stocks
             return stock;
         }
 
-        public static List<StockVM> ToVM(this IEnumerable<Stock> stocks)
+        public static List<StockVM> ToVM(this IEnumerable<StockDocument> stocks)
         {
             var stocksVM = new List<StockVM>();
             foreach (var item in stocks)
@@ -55,7 +55,7 @@ namespace PatchaWallet.Stocks
             return stocksVM;
         }
 
-        public static QuoteVM ToVM(this Quote quote)
+        public static QuoteVM ToVM(this QuoteDocument quote)
         {
             var quoteVM = new QuoteVM()
             {
@@ -76,9 +76,9 @@ namespace PatchaWallet.Stocks
             return quoteVM;
         }
 
-        public static Quote ToEntity(this QuoteVM quoteVM)
+        public static QuoteDocument ToEntity(this QuoteVM quoteVM)
         {
-            var quote = new Quote()
+            var quote = new QuoteDocument()
             {
                 Id = quoteVM.Id,
                 Symbol = quoteVM.Symbol,
@@ -95,6 +95,104 @@ namespace PatchaWallet.Stocks
             };
 
             return quote;
+        }
+
+        public static StockTransactionVM ToVM(this StockTransactionDocument stockTransaction)
+        {
+            var stockTransactionVM = new StockTransactionVM()
+            {
+                Id = stockTransaction.Id,
+                Stock = stockTransaction.Stock?.ToVM(),
+                Commission = stockTransaction.Commission,
+                Amount = stockTransaction.Amount,
+                Price = stockTransaction.Price,
+                When = stockTransaction.When,
+                TradeType = stockTransaction.TradeType,
+                User = stockTransaction.User?.ToVM()
+            };
+
+            return stockTransactionVM;
+        }
+
+        public static StockTransactionDocument ToDocument(this StockTransactionVM stockTransactionVM)
+        {
+            var stockTransaction = new StockTransactionDocument()
+            {
+                Id = stockTransactionVM.Id,
+                Stock = stockTransactionVM.Stock?.ToDocument(),
+                Commission = stockTransactionVM.Commission,
+                Amount = stockTransactionVM.Amount,
+                Price = stockTransactionVM.Price,
+                When = stockTransactionVM.When,
+                TradeType = stockTransactionVM.TradeType,
+                User = stockTransactionVM.User?.ToDocument()
+            };
+
+            return stockTransaction;
+        }
+
+        public static List<StockTransactionVM> ToVM(this List<StockTransactionDocument> stockTransactions)
+        {
+            var stockTransactionsVM = new List<StockTransactionVM>();
+
+            foreach (var item in stockTransactions)
+            {
+                stockTransactionsVM.Add(item.ToVM());
+            }
+
+            return stockTransactionsVM;
+        }
+
+        public static List<StockTransactionDocument> ToDocument(this List<StockTransactionVM> stockTransactionsVM)
+        {
+            var stockTransactions = new List<StockTransactionDocument>();
+
+            foreach (var item in stockTransactionsVM)
+            {
+                stockTransactions.Add(item.ToDocument());
+            }
+
+            return stockTransactions;
+        }
+
+        public static IEnumerable<StockTransactionVM> ToVM(this IEnumerable<StockTransactionDocument> stockTransactions)
+        {
+            return stockTransactions.ToVM();
+        }
+
+        public static IEnumerable<StockTransactionDocument> ToDocument(this IEnumerable<StockTransactionVM> stockTransactionsVM)
+        {
+            return stockTransactionsVM.ToDocument();
+        }
+
+        public static UserVM ToVM(this UserDocument document)
+        {
+            var userVM = new UserVM()
+            {
+                Id = document.Id,
+                UserName = document.UserName,
+                Nome = document.Nome,
+                Sobrenome = document.Sobrenome,
+                Email = document.Email,
+                PhoneNumber = document.PhoneNumber,
+            };
+
+            return userVM;
+        }
+
+        public static UserDocument ToDocument(this UserVM vm)
+        {
+            var document = new UserDocument()
+            {
+                Id = vm.Id,
+                UserName = vm.UserName,
+                Nome = vm.Nome,
+                Sobrenome = vm.Sobrenome,
+                Email = vm.Email,
+                PhoneNumber = vm.PhoneNumber,
+            };
+
+            return document;
         }
 
     }
