@@ -1,0 +1,22 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+EXPOSE 27017
+EXPOSE 80
+EXPOSE 443
+
+WORKDIR /repo
+
+COPY PatchaWallet.Stocks.sln .
+COPY src/PatchaWallet.Stocks/PatchaWallet.Stocks.csproj ./src/PatchaWallet.Stocks/PatchaWallet.Stocks.csproj
+
+RUN dotnet restore
+
+COPY . ./
+
+RUN dotnet publish ./src/PatchaWallet.Stocks/PatchaWallet.Stocks.csproj -c Release -o /app/
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
+
+COPY --from=build /app/ /app/
+WORKDIR /app
+
+ENTRYPOINT ["dotnet", "PatchaWallet.Stocks.dll"]
