@@ -14,16 +14,14 @@ namespace PatchaWallet.Stocks
             _client = client;
         }
 
-        public Task<StockTransactionVM> Handle(CreateRequest<StockTransactionVM> request, CancellationToken cancellationToken)
+        public async Task<StockTransactionVM> Handle(CreateRequest<StockTransactionVM> request, CancellationToken cancellationToken)
         {
-            return Task.Factory.StartNew(() => {
-                var transactionVM = request.Item;
-                transactionVM.Id = ObjectId.GenerateNewId().ToString();
-                var document = transactionVM.ToDocument();
-                _client.StockTransactions.CreateDocumentAsync(document);
+            var transactionVM = request.Item;
+            transactionVM.Id = ObjectId.GenerateNewId().ToString();
+            var document = transactionVM.ToDocument();
+            await _client.StockTransactions.CreateDocumentAsync(document);
 
-                return transactionVM;
-            });
+            return transactionVM;
         }
     }
 }

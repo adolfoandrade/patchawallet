@@ -40,13 +40,7 @@ namespace PatchaWallet.Stocks
         public async Task<IActionResult> ImportFromCEI()
         {
             IFormFile file = Request.Form.Files[0];
-            string folderName = "Upload";
-            string webRootPath = _hostingEnvironment.WebRootPath;
-            string contentRootPath = _hostingEnvironment.ContentRootPath;
-
-            string newPath = Path.Combine(contentRootPath + "\n" + webRootPath, folderName);
-
-            var negotiations_to_import = await _transactionService.ImportFromCEIAsync(file, newPath);
+            var negotiations_to_import = await _transactionService.ImportFromCEIAsync(file);
 
             if (_notifications.HasNotifications)
                 return BadRequest(_notifications.Notifications);

@@ -144,7 +144,7 @@ namespace PatchaWallet.Stocks
             await _mediator.Send(new DeleteRequest<StockTransactionVM>(stock_trade));
         }
 
-        public async Task<List<StockTransactionVM>> ImportFromCEIAsync(IFormFile file, string newPath)
+        public async Task<List<StockTransactionVM>> ImportFromCEIAsync(IFormFile file)
         {
             if (!_user.IsAuthenticated())
             {
@@ -162,7 +162,6 @@ namespace PatchaWallet.Stocks
             {
                 string sFileExtension = Path.GetExtension(file.FileName).ToLower();
                 ISheet sheet;
-                string fullPath = Path.Combine(newPath, file.FileName);
                 using (var stream = new MemoryStream())
                 {
                     file.CopyTo(stream);

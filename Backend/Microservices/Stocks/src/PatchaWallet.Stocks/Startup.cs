@@ -140,7 +140,7 @@ namespace PatchaWallet.Stocks
                 endpoints.MapControllers();
             });
 
-            //app.UseMongoDbStorage();
+            app.UseMongoDbStorage();
 
             app.UseHealthChecks("/hc",
                new HealthCheckOptions
