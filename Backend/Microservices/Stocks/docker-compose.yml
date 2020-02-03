@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  patchawallet.stocks:
+    image: ${DOCKER_REGISTRY-}patchawalletstocks
+    build:
+      context: .
+      dockerfile: src/PatchaWallet.Stocks/Dockerfile
+    ports:
+      - "44314:44314"
+    networks:
+      - patchawallet-network
+
+networks:
+    patchawallet-network:
+      driver: bridge
